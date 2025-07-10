@@ -26,21 +26,21 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Core - Make Output Path
-        run: mkdir UBFBuild
-      - name: Core - Find Package Files
+      - name: Make Output Path
+        run: mkdir Build
+      - name: Find Package Files
         run: |
           echo "Assets/Plugins/UBF.meta" >> metalist
           find "Assets/Plugins/UBF/" -name \*.meta >> metaList
-      - name: Core - Create Unity Package
+      - name: Create Unity Package
         uses: pCYSl5EDgo/create-unitypackage@master
         with:
-          package-path: UBFBuild/UBF.unitypackage
+          package-path: Build/UBF.unitypackage
           include-files: metaList
-      - name: Core - Upload Package
+      - name: Upload Package
         uses: actions/upload-artifact@v4
         with:
-          path: UBFBuild
+          path: Build
           name: UBF Package
 
       - name: Return license
