@@ -9,6 +9,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Generate token
+        id: generate-token
+        uses: tibdex/github-app-token@v1
+        with:
+          app_id: ${{ secrets.FV_GH_BOT_APP_ID }}
+          private_key: ${{ secrets.FV_GH_BOT_PRIVATE_KEY }}
+
       - name: Cache Unity Library Folder
         uses: actions/cache@v4
         with:
@@ -26,22 +33,37 @@ jobs:
         with:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Make Output Path
-        run: mkdir Build
-      - name: Find Package Files
+      - name: Bump version
+        id: changelog
+        uses: TriPSs/conventional-changelog-action@v5
+        with:
+          version-file: "Assets/Plugins/UBF/package.json"
+          input-file: "./CHANGELOG.md"
+          github-token: ${{ steps.generate-token.outputs.token }}
+          git-user-name: FVCodePublisher
+          git-user-email: codepublish@futureverse.com
+
+      - name: Find package files
+        if: steps.changelog.outputs.skipped != 'true'
         run: |
           echo "Assets/Plugins/UBF.meta" >> metalist
           find "Assets/Plugins/UBF/" -name \*.meta >> metaList
-      - name: Create Unity Package
+
+      - name: Create Package
+        if: steps.changelog.outputs.skipped != 'true'
         uses: pCYSl5EDgo/create-unitypackage@master
         with:
-          package-path: Build/UBF.unitypackage
+          package-path: UBF.unitypackage
           include-files: metaList
-      - name: Upload Package
-        uses: actions/upload-artifact@v4
+
+      - name: Create GitHub release
+        if: steps.changelog.outputs.skipped != 'true'
+        uses: softprops/action-gh-release@v1
         with:
-          path: Build
-          name: UBF Package
+          tag_name: v${{ steps.changelog.outputs.version }}
+          name: v${{ steps.changelog.outputs.version }}
+          body: ${{ steps.changelog.outputs.changelog }}
+          files: UBF.unitypackage
 
       - name: Return license
         uses: game-ci/unity-return-license@v2
