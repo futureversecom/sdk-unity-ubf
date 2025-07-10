@@ -1,0 +1,49 @@
+name: Build
+run-name: Build
+on: workflow_dispatch
+jobs:
+  create-unity-package:
+    name: Create Unity Package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Cache Unity Library Folder
+        uses: actions/cache@v4
+        with:
+          path: Library
+          key: Library-${{ hashFiles('Assets/**', 'Packages/**', 'ProjectSettings/**') }}
+          restore-keys: |
+            Library-
+
+      - name: Run Unity Tests
+        uses: game-ci/unity-test-runner@v4
+        env:
+          UNITY_SERIAL: ${{ secrets.UNITY_SERIAL }}
+          UNITY_EMAIL: ${{ secrets.UNITY_EMAIL }}
+          UNITY_PASSWORD: ${{ secrets.UNITY_PASSWORD }}
+        with:
+          projectPath: Unity/UBF Plugin
+          githubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Core - Make Output Path
+        run: mkdir UBFBuild
+      - name: Core - Find Package Files
+        run: |
+          echo "Assets/Plugins/UBF.meta" >> "metalist"
+          find "Assets/Plugins/UBF/" -name \*.meta >> "metaList"
+      - name: Core - Create Unity Package
+        uses: pCYSl5EDgo/create-unitypackage@master
+        with:
+          package-path: "UBFBuild/UBF.unitypackage"
+          include-files: metaList
+      - name: Core - Upload Package
+        uses: actions/upload-artifact@v4
+        with:
+          path: "Unity/UBF Plugin/UBFBuild"
+          name: UBF Package
+
+      - name: Return license
+        uses: game-ci/unity-return-license@v2
+        if: always()
