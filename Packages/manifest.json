@@ -1,6 +1,5 @@
 {
   "dependencies": {
-    "com.cyanilux.shadergraph-variables": "https://github.com/Cyanilux/ShaderGraphVariables.git",
     "com.unity.cloud.draco": "5.1.4",
     "com.unity.cloud.gltfast": "6.12.1",
     "com.unity.collab-proxy": "2.3.1",
