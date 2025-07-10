@@ -31,17 +31,17 @@ jobs:
         run: mkdir UBFBuild
       - name: Core - Find Package Files
         run: |
-          echo "Assets/Plugins/UBF.meta" >> "metalist"
-          find "Assets/Plugins/UBF/" -name \*.meta >> "metaList"
+          echo "Assets/Plugins/UBF.meta" >> metalist
+          find "Assets/Plugins/UBF/" -name \*.meta >> metaList
       - name: Core - Create Unity Package
         uses: pCYSl5EDgo/create-unitypackage@master
         with:
-          package-path: "UBFBuild/UBF.unitypackage"
+          package-path: UBFBuild/UBF.unitypackage
           include-files: metaList
       - name: Core - Upload Package
         uses: actions/upload-artifact@v4
         with:
-          path: "Unity/UBF Plugin/UBFBuild"
+          path: UBFBuild
           name: UBF Package
 
       - name: Return license
