@@ -22,7 +22,7 @@ namespace Futureverse.UBF.Runtime
 
 		private readonly GraphInstance* _nativePtr;
 		private readonly Dictionary<string, object> _variables = new();
-		public readonly string InstanceId { get; internal set; }
+		public readonly string InstanceId;
 		
 		public void RegisterVariable(string name, object value)
 		{
