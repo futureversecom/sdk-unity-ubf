@@ -24,7 +24,7 @@ namespace Futureverse.UBF.Runtime
 		private readonly Dictionary<string, object> _variables = new();
 		internal readonly string InstanceId;
 		
-		internal void RegisterVariable(string name, object value)
+		public void RegisterVariable(string name, object value)
 		{
 			// TODO: Check against blueprint variables
 			_variables[name] = value;
