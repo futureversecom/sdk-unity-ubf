@@ -15,7 +15,7 @@ namespace Futureverse.UBF.Runtime.Execution
 		/// <summary>
 		/// Callback containing the result of the Execution.
 		/// </summary>
-		Action<ExecutionResult> OnComplete { get; }
+		Action<ExecutionResult> OnComplete { get; set; }
 		/// <summary>
 		/// Creates an instance of an IExecutionConfig that the Execution requires to run.
 		/// </summary>
@@ -26,7 +26,7 @@ namespace Futureverse.UBF.Runtime.Execution
 
 	public class ExecutionData : IExecutionData
 	{
-		public Action<ExecutionResult> OnComplete { get; }
+		public Action<ExecutionResult> OnComplete { get; set; }
 		
 		private readonly Transform _root;
 		private readonly List<IBlueprintInstanceData> _blueprints;

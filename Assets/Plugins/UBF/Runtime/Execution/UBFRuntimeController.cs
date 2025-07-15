@@ -57,6 +57,34 @@ namespace Futureverse.UBF.Runtime.Execution
 				transform.gameObject.SetActive(true);
 			}
 		}
+		
+		public IEnumerator Execute(
+			string rootInstanceId,
+			IExecutionData executionData,
+			Action<ExecutionResult> onComplete = null)
+		{
+			if (_destroyPreviousOnExecute)
+			{
+				DestroyChildObjects();
+			}
+
+			if (_disableWhileExecuting)
+			{
+				transform.gameObject.SetActive(false);
+			}
+			
+			executionData.OnComplete += (x) => _onExecutionComplete.Invoke(x);
+
+			yield return UBFExecutor.ExecuteRoutine(
+				executionData,
+				rootInstanceId
+			);
+
+			if (_disableWhileExecuting)
+			{
+				transform.gameObject.SetActive(true);
+			}
+		}
 
 		/// <summary>
 		/// Clear all GameObjects that were created by UBF Blueprint executions, and clean up resources
