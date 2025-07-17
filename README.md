@@ -1,10 +1,18 @@
-# Universal Blueprint Framework
+# Universal Blueprint Framework - Unity Interpreter
 
-A UBF Interpreter for Unity
+**A UBF Interpreter for Unity by [Futureverse](https://www.futureverse.com)**
+
+This SDK provides a runtime interpreter for the **Universal Blueprint Framework (UBF)**, designed specifically for use in Unity-based applications. It allows developers to execute UBF Blueprints inside Unity scenes using a flexible, engine-agnostic system. The Interpreter is an essential part of the broader UBF ecosystem.
+
+> For more information about the Universal Blueprint Framework, its authoring tools, and the full ecosystem, please visit the [UBF Open Standard](https://ubfstandard.com/) and the [Futureverse Developer Documentation](https://docs.futureverse.com/1134b651-6817-4acb-ab1a-7bced4b15e80).
 
 ## Installation
 
-Go to the Unity Package Manager window, and select Add package from git URL... and enter this link: https://github.com/futureversecom/sdk-unity-asset-register.git?path=Assets/Plugins/AssetRegister (append `#vX.X.X` to specify a version). Alternatively, you can get a .unitypackage from the Releases page.
+Go to the Unity Package Manager window, and select **Add package from git URL...** and enter the following link:
+https://github.com/futureversecom/sdk-unity-asset-register.git?path=Assets/Plugins/AssetRegister
+
+To specify a version, append `#vX.X.X` (e.g., `#v1.2.3`).  
+Alternatively, you can download a `.unitypackage` from the [Releases](https://github.com/futureversecom/sdk-unity-asset-register/releases) page.
 
 ## Overview
 
@@ -79,3 +87,7 @@ public class SimpleExecutor : MonoBehaviour
 This script assumes you have a URL for a Catalog that contains a Blueprint Resource. This is just to demonstrate how you can prepare the required data and use UBFExecutor to run the UBF system, but realistically you will use the Execution Controller to obtain the Catalog URLs.
 
 Alternatively, you can check out the `SumOfTwoNumbers` Sample that is included with the SDK. It shows how you can run a Blueprint that is stored locally in your Unity project.
+
+## License
+
+This SDK is provided under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
