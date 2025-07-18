@@ -12,7 +12,7 @@ Go to the Unity Package Manager window, and select **Add package from git URL...
 https://github.com/futureversecom/sdk-unity-ubf.git?path=Assets/Plugins/UBF
 
 To specify a version, append `#vX.X.X` (e.g., `#v1.2.3`).  
-Alternatively, you can download a `.unitypackage` from the [Releases](https://github.com/futureversecom/sdk-unity-asset-register/releases) page.
+Alternatively, you can download a `.unitypackage` from the [Releases](https://github.com/futureversecom/sdk-unity-ubf/releases) page.
 
 ## Overview
 
