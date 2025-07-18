@@ -88,6 +88,3 @@ This script assumes you have a URL for a Catalog that contains a Blueprint Resou
 
 Alternatively, you can check out the `SumOfTwoNumbers` Sample that is included with the SDK. It shows how you can run a Blueprint that is stored locally in your Unity project.
 
-## License
-
-This SDK is provided under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
