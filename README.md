@@ -4,7 +4,7 @@
 
 This SDK provides a runtime interpreter for the **Universal Blueprint Framework (UBF)**, designed specifically for use in Unity-based applications. It allows developers to execute UBF Blueprints inside Unity scenes using a flexible, engine-agnostic system. The Interpreter is an essential part of the broader UBF ecosystem.
 
-> For more information about the Universal Blueprint Framework, its authoring tools, and the full ecosystem, please visit the [UBF Open Standard](https://ubfstandard.com/) and the [Futureverse Developer Documentation](https://docs.futureverse.com/1134b651-6817-4acb-ab1a-7bced4b15e80).
+> For more information about the Universal Blueprint Framework, its authoring tools, and the full ecosystem, please visit the [UBF Open Standard](https://ubfstandard.com/) and the [Futureverse Developer Documentation](https://docs.futureverse.com/build-an-asset/asset-creation).
 
 ## Installation
 
@@ -16,7 +16,7 @@ Alternatively, you can download a `.unitypackage` from the [Releases](https://gi
 
 ## Overview
 
-The Unity UBF Interpreter converts Blueprint’s engine‑agnostic instructions — defined in compliance with the [UBF Open Standard](https://ubfstandard.com/) — into native API calls, commands, and data formats that Unity can understand and execute. This Interpreter sits on the execution side of the UBF stack. It is completely decoupled from authoring (UBF Studio) and orchestration (Execution Controller). For more on those, see [Creating UBF Content](https://docs.futureverse.com/1134b651-6817-4acb-ab1a-7bced4b15e80/ubf-studio-and-ubf-projects) and the [Unity Execution Controller](https://github.com/futureversecom/sdk-unity-execution-controller).
+The Unity UBF Interpreter converts Blueprint’s engine‑agnostic instructions — defined in compliance with the [UBF Open Standard](https://ubfstandard.com/) — into native API calls, commands, and data formats that Unity can understand and execute. This Interpreter sits on the execution side of the UBF stack. It is completely decoupled from authoring (UBF Studio) and orchestration (Execution Controller). For more on those, see [Creating UBF Content](https://docs.futureverse.com/build-an-asset/asset-creation/blueprint-creation/ubf-studio-and-ubf-projects) and the [Unity Execution Controller](https://github.com/futureversecom/sdk-unity-execution-controller).
 
 The Interpreter is intentionally narrow in responsibility: it takes a compiled UBF Blueprint as input and simply executes it within a Unity scene, without any awareness of the Blueprint’s intent or the broader system context. They are entirely blind to external concerns—such as equipment trees, blockchain concepts, or orchestration logic—which are handled elsewhere. This isolation makes the Interpreter highly generic, allowing it to stand alone and serve an open-ended range of use cases across various applications.
 ​
