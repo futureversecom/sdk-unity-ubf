@@ -9,7 +9,7 @@ This SDK provides a runtime interpreter for the **Universal Blueprint Framework 
 ## Installation
 
 Go to the Unity Package Manager window, and select **Add package from git URL...** and enter the following link:
-https://github.com/futureversecom/sdk-unity-asset-register.git?path=Assets/Plugins/AssetRegister
+https://github.com/futureversecom/sdk-unity-ubf.git?path=Assets/Plugins/UBF
 
 To specify a version, append `#vX.X.X` (e.g., `#v1.2.3`).  
 Alternatively, you can download a `.unitypackage` from the [Releases](https://github.com/futureversecom/sdk-unity-asset-register/releases) page.
