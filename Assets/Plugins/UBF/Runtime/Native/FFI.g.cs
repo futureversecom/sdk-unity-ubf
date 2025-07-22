@@ -88,7 +88,7 @@ namespace Futureverse.UBF.Runtime.Native.FFI
 
         [DllImport(__DllName, EntryPoint = "ctx_read_input", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool ctx_read_input(ArcExecutionContext* execution_context, ushort* node_id, int node_id_len, ushort* port_key, int port_key_len, uint scope, Dynamic** @out);
+        public static extern bool ctx_read_input(ArcExecutionContext* execution_context, ushort* node_id, int node_id_len, ushort* port_key, int port_key_len, uint scope, uint _other_thing, Dynamic** @out);
 
         [DllImport(__DllName, EntryPoint = "ctx_get_context_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern Dynamic* ctx_get_context_data(ArcExecutionContext* execution_context);
