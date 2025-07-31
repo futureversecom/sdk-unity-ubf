@@ -1,3 +1,16 @@
+## [0.4.1](https://github.com/futureversecom/sdk-unity-ubf/compare/v0.4.0...v0.4.1) (2025-07-31)
+
+
+### Bug Fixes
+
+* expose blueprint instance id ([cdb352e](https://github.com/futureversecom/sdk-unity-ubf/commit/cdb352e1e646c49307ebca4f941015f5aee1b78d))
+* expose blueprint variable registration ([a135626](https://github.com/futureversecom/sdk-unity-ubf/commit/a135626ef9770ac08b9cc6ebc8d496182b6db3e2))
+* expose execution data onComplete, add new overload for execution prebuilt data ([5928712](https://github.com/futureversecom/sdk-unity-ubf/commit/592871210354293a8f7c4eb2d7cbed2fd459cd42))
+* instance id scope structure ([2fb651c](https://github.com/futureversecom/sdk-unity-ubf/commit/2fb651cbccccb32c6264ca5836b9c99879f9d634))
+* MakeDecalMaterial input names ([fc1d370](https://github.com/futureversecom/sdk-unity-ubf/commit/fc1d370f81937f106c687ddfbfe55325e4c6ebfd))
+
+
+
 # 0.4.0 (2025-07-10)
 
 

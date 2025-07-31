@@ -1,21 +1,21 @@
 ﻿# Summary
 |||
 |:---|:---|
-| Generated on: | 07/10/2025 - 22:35:36 |
-| Parser: | MultiReportParser (3x OpenCoverParser) |
+| Generated on: | 07/31/2025 - 01:11:44 |
+| Parser: | MultiReportParser (6x OpenCoverParser) |
 | Assemblies: | 6 |
 | Classes: | 104 |
 | Files: | 85 |
 | Covered lines: | 1432 |
-| Uncovered lines: | 2216 |
-| Coverable lines: | 3648 |
-| Total lines: | 11501 |
-| Line coverage: | 39.2% (1432 of 3648) |
+| Uncovered lines: | 2232 |
+| Coverable lines: | 3664 |
+| Total lines: | 11529 |
+| Line coverage: | 39% (1432 of 3664) |
 | Covered branches: | 0 |
 | Total branches: | 0 |
 | Covered methods: | 249 |
-| Total methods: | 545 |
-| Method coverage: | 45.6% (249 of 545) |
+| Total methods: | 548 |
+| Method coverage: | 45.4% (249 of 548) |
 
 |**Name**|**Covered**|**Uncovered**|**Coverable**|**Total**|**Line coverage**|**Covered**|**Total**|**Branch coverage**|**Covered**|**Total**|**Method coverage**|
 |:---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -34,7 +34,7 @@
 |Testbed.Parsing.ParsingExecutorEditor|0|14|14|123|0%|0|0||0|1|0%|
 |Testbed.Simple.SimpleExecutor|0|25|25|88|0%|0|0||0|3|0%|
 |Testbed.Simple.SimpleExecutorEditor|0|14|14|88|0%|0|0||0|1|0%|
-|**com.futureverse.ubf.runtime**|**761**|**1810**|**2571**|**7778**|**29.5%**|**0**|**0**|****|**135**|**340**|**39.7%**|
+|**com.futureverse.ubf.runtime**|**761**|**1826**|**2587**|**7806**|**29.4%**|**0**|**0**|****|**135**|**343**|**39.3%**|
 |Futureverse.UBF.Runtime.ACustomExecNode|10|17|27|79|37%|0|0||3|6|50%|
 |Futureverse.UBF.Runtime.ACustomNode|45|6|51|152|88.2%|0|0||10|13|76.9%|
 |Futureverse.UBF.Runtime.Blueprint|71|60|131|341|54.1%|0|0||8|13|61.5%|
@@ -69,10 +69,10 @@
 |Futureverse.UBF.Runtime.Execution.ArtifactProvider|19|19|38|141|50%|0|0||6|10|60%|
 |Futureverse.UBF.Runtime.Execution.BlueprintInstanceData|0|19|19|64|0%|0|0||0|7|0%|
 |Futureverse.UBF.Runtime.Execution.ExecutionConfig|9|18|27|93|33.3%|0|0||3|6|50%|
-|Futureverse.UBF.Runtime.Execution.ExecutionData|0|26|26|78|0%|0|0||0|3|0%|
+|Futureverse.UBF.Runtime.Execution.ExecutionData|0|26|26|78|0%|0|0||0|4|0%|
 |Futureverse.UBF.Runtime.Execution.ExecutionResult|0|11|11|45|0%|0|0||0|4|0%|
 |Futureverse.UBF.Runtime.Execution.UBFExecutor|0|15|15|44|0%|0|0||0|1|0%|
-|Futureverse.UBF.Runtime.Execution.UBFRuntimeController|0|24|24|74|0%|0|0||0|3|0%|
+|Futureverse.UBF.Runtime.Execution.UBFRuntimeController|0|40|40|102|0%|0|0||0|5|0%|
 |Futureverse.UBF.Runtime.ExecutionContext|67|73|140|341|47.8%|0|0||13|24|54.1%|
 |Futureverse.UBF.Runtime.GLBReference|4|112|116|245|3.4%|0|0||2|14|14.2%|
 |Futureverse.UBF.Runtime.MeshConfig|0|2|2|24|0%|0|0||0|2|0%|

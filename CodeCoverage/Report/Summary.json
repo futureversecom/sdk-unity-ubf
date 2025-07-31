@@ -1,20 +1,20 @@
 {
   "summary": {
-    "generatedon": "2025-07-10T22:35:36Z",
-    "parser": "MultiReportParser (3x OpenCoverParser)",
+    "generatedon": "2025-07-31T01:11:44Z",
+    "parser": "MultiReportParser (6x OpenCoverParser)",
     "assemblies": 6,
     "classes": 104,
     "files": 85,
     "coveredlines": 1432,
-    "uncoveredlines": 2216,
-    "coverablelines": 3648,
-    "totallines": 11501,
-    "linecoverage": 39.2,
+    "uncoveredlines": 2232,
+    "coverablelines": 3664,
+    "totallines": 11529,
+    "linecoverage": 39,
     "coveredbranches": 0,
     "totalbranches": 0,
     "coveredmethods": 249,
-    "totalmethods": 545,
-    "methodcoverage": 45.6
+    "totalmethods": 548,
+    "methodcoverage": 45.4
  },
   "coverage": {
     "assemblies": [
@@ -33,7 +33,7 @@
         { "name": "Testbed.Parsing.ParsingExecutorEditor", "coverage": 0, "coveredlines": 0, "coverablelines": 14, "totallines": 123, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
         { "name": "Testbed.Simple.SimpleExecutor", "coverage": 0, "coveredlines": 0, "coverablelines": 25, "totallines": 88, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
         { "name": "Testbed.Simple.SimpleExecutorEditor", "coverage": 0, "coveredlines": 0, "coverablelines": 14, "totallines": 88, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 } ] },
-      { "name": "com.futureverse.ubf.runtime", "classes": 76, "coverage": 29.5, "coveredlines": 761, "coverablelines": 2571, "totallines": 7778, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 39.7, "coveredmethods": 135, "totalmethods": 340, "classesinassembly": [
+      { "name": "com.futureverse.ubf.runtime", "classes": 76, "coverage": 29.4, "coveredlines": 761, "coverablelines": 2587, "totallines": 7806, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 39.3, "coveredmethods": 135, "totalmethods": 343, "classesinassembly": [
         { "name": "Futureverse.UBF.Runtime.ACustomExecNode", "coverage": 37, "coveredlines": 10, "coverablelines": 27, "totallines": 79, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 3, "totalmethods": 6 },
         { "name": "Futureverse.UBF.Runtime.ACustomNode", "coverage": 88.2, "coveredlines": 45, "coverablelines": 51, "totallines": 152, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 76.9, "coveredmethods": 10, "totalmethods": 13 },
         { "name": "Futureverse.UBF.Runtime.Blueprint", "coverage": 54.1, "coveredlines": 71, "coverablelines": 131, "totallines": 341, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 61.5, "coveredmethods": 8, "totalmethods": 13 },
@@ -68,10 +68,10 @@
         { "name": "Futureverse.UBF.Runtime.Execution.ArtifactProvider", "coverage": 50, "coveredlines": 19, "coverablelines": 38, "totallines": 141, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 60, "coveredmethods": 6, "totalmethods": 10 },
         { "name": "Futureverse.UBF.Runtime.Execution.BlueprintInstanceData", "coverage": 0, "coveredlines": 0, "coverablelines": 19, "totallines": 64, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 7 },
         { "name": "Futureverse.UBF.Runtime.Execution.ExecutionConfig", "coverage": 33.3, "coveredlines": 9, "coverablelines": 27, "totallines": 93, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 50, "coveredmethods": 3, "totalmethods": 6 },
-        { "name": "Futureverse.UBF.Runtime.Execution.ExecutionData", "coverage": 0, "coveredlines": 0, "coverablelines": 26, "totallines": 78, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "Futureverse.UBF.Runtime.Execution.ExecutionData", "coverage": 0, "coveredlines": 0, "coverablelines": 26, "totallines": 78, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
         { "name": "Futureverse.UBF.Runtime.Execution.ExecutionResult", "coverage": 0, "coveredlines": 0, "coverablelines": 11, "totallines": 45, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 4 },
         { "name": "Futureverse.UBF.Runtime.Execution.UBFExecutor", "coverage": 0, "coveredlines": 0, "coverablelines": 15, "totallines": 44, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 1 },
-        { "name": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "coverage": 0, "coveredlines": 0, "coverablelines": 24, "totallines": 74, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 3 },
+        { "name": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "coverage": 0, "coveredlines": 0, "coverablelines": 40, "totallines": 102, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 5 },
         { "name": "Futureverse.UBF.Runtime.ExecutionContext", "coverage": 47.8, "coveredlines": 67, "coverablelines": 140, "totallines": 341, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 54.1, "coveredmethods": 13, "totalmethods": 24 },
         { "name": "Futureverse.UBF.Runtime.GLBReference", "coverage": 3.4, "coveredlines": 4, "coverablelines": 116, "totallines": 245, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 14.2, "coveredmethods": 2, "totalmethods": 14 },
         { "name": "Futureverse.UBF.Runtime.MeshConfig", "coverage": 0, "coveredlines": 0, "coverablelines": 2, "totallines": 24, "branchcoverage": null, "coveredbranches": 0, "totalbranches": 0, "methodcoverage": 0, "coveredmethods": 0, "totalmethods": 2 },

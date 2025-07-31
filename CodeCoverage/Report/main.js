@@ -279,7 +279,7 @@ var assemblies = [
       { "name": "Futureverse.UBF.Runtime.Execution.ExecutionData", "rp": "com.futureverse.ubf.runtime_ExecutionData.html", "cl": 0, "ucl": 26, "cal": 26, "tl": 78, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Futureverse.UBF.Runtime.Execution.ExecutionResult", "rp": "com.futureverse.ubf.runtime_ExecutionResult.html", "cl": 0, "ucl": 11, "cal": 11, "tl": 45, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Futureverse.UBF.Runtime.Execution.UBFExecutor", "rp": "com.futureverse.ubf.runtime_UBFExecutor.html", "cl": 0, "ucl": 15, "cal": 15, "tl": 44, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
-      { "name": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "rp": "com.futureverse.ubf.runtime_UBFRuntimeController.html", "cl": 0, "ucl": 24, "cal": 24, "tl": 74, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
+      { "name": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "rp": "com.futureverse.ubf.runtime_UBFRuntimeController.html", "cl": 0, "ucl": 40, "cal": 40, "tl": 102, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Futureverse.UBF.Runtime.ExecutionContext", "rp": "com.futureverse.ubf.runtime_ExecutionContext.html", "cl": 67, "ucl": 73, "cal": 140, "tl": 341, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Futureverse.UBF.Runtime.GLBReference", "rp": "com.futureverse.ubf.runtime_GLBReference.html", "cl": 4, "ucl": 112, "cal": 116, "tl": 245, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
       { "name": "Futureverse.UBF.Runtime.MeshConfig", "rp": "com.futureverse.ubf.runtime_MeshConfig.html", "cl": 0, "ucl": 2, "cal": 2, "tl": 24, "ct": "LineCoverage", "mc": "-", "cb": 0, "tb": 0, "lch": [], "bch": [], "hc": [] },
@@ -495,6 +495,13 @@ var riskHotspots = [
     ]},
   {
     "assembly": "com.futureverse.ubf.runtime", "class": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "reportPath": "com.futureverse.ubf.runtime_UBFRuntimeController.html", "methodName": "Execute()", "methodShortName": "Execute()", "fileIndex": 0, "line": 33,
+    "metrics": [
+      { "value": 6, "exceeded": false },
+      { "value": 0, "exceeded": false },
+      { "value": 42, "exceeded": true },
+    ]},
+  {
+    "assembly": "com.futureverse.ubf.runtime", "class": "Futureverse.UBF.Runtime.Execution.UBFRuntimeController", "reportPath": "com.futureverse.ubf.runtime_UBFRuntimeController.html", "methodName": "Execute()", "methodShortName": "Execute()", "fileIndex": 0, "line": 65,
     "metrics": [
       { "value": 6, "exceeded": false },
       { "value": 0, "exceeded": false },

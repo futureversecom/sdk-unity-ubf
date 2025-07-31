@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <CoverageReport scope="Summary">
   <Summary>
-    <Generatedon>07/10/2025 - 22:35:36</Generatedon>
-    <Parser>MultiReportParser (3x OpenCoverParser)</Parser>
+    <Generatedon>07/31/2025 - 01:11:44</Generatedon>
+    <Parser>MultiReportParser (6x OpenCoverParser)</Parser>
     <Assemblies>6</Assemblies>
     <Classes>104</Classes>
     <Files>85</Files>
     <Coveredlines>1432</Coveredlines>
-    <Uncoveredlines>2216</Uncoveredlines>
-    <Coverablelines>3648</Coverablelines>
-    <Totallines>11501</Totallines>
-    <Linecoverage>39.2</Linecoverage>
+    <Uncoveredlines>2232</Uncoveredlines>
+    <Coverablelines>3664</Coverablelines>
+    <Totallines>11529</Totallines>
+    <Linecoverage>39</Linecoverage>
     <Coveredbranches>0</Coveredbranches>
     <Totalbranches>0</Totalbranches>
     <Coveredmethods>249</Coveredmethods>
-    <Totalmethods>545</Totalmethods>
-    <Methodcoverage>45.6</Methodcoverage>
+    <Totalmethods>548</Totalmethods>
+    <Methodcoverage>45.4</Methodcoverage>
   </Summary>
   <Coverage>
     <Assembly name="Assembly-CSharp" classes="14" coverage="0" coveredlines="0" coverablelines="222" totallines="1367" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="33" methodcoverage="0">
@@ -34,7 +34,7 @@
       <Class name="Testbed.Simple.SimpleExecutor" coverage="0" coveredlines="0" coverablelines="25" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
       <Class name="Testbed.Simple.SimpleExecutorEditor" coverage="0" coveredlines="0" coverablelines="14" totallines="88" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
     </Assembly>
-    <Assembly name="com.futureverse.ubf.runtime" classes="76" coverage="29.5" coveredlines="761" coverablelines="2571" totallines="7778" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="135" totalmethods="340" methodcoverage="39.7">
+    <Assembly name="com.futureverse.ubf.runtime" classes="76" coverage="29.4" coveredlines="761" coverablelines="2587" totallines="7806" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="135" totalmethods="343" methodcoverage="39.3">
       <Class name="Futureverse.UBF.Runtime.ACustomExecNode" coverage="37" coveredlines="10" coverablelines="27" totallines="79" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="6" methodcoverage="50" />
       <Class name="Futureverse.UBF.Runtime.ACustomNode" coverage="88.2" coveredlines="45" coverablelines="51" totallines="152" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="10" totalmethods="13" methodcoverage="76.9" />
       <Class name="Futureverse.UBF.Runtime.Blueprint" coverage="54.1" coveredlines="71" coverablelines="131" totallines="341" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="8" totalmethods="13" methodcoverage="61.5" />
@@ -69,10 +69,10 @@
       <Class name="Futureverse.UBF.Runtime.Execution.ArtifactProvider" coverage="50" coveredlines="19" coverablelines="38" totallines="141" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="6" totalmethods="10" methodcoverage="60" />
       <Class name="Futureverse.UBF.Runtime.Execution.BlueprintInstanceData" coverage="0" coveredlines="0" coverablelines="19" totallines="64" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="7" methodcoverage="0" />
       <Class name="Futureverse.UBF.Runtime.Execution.ExecutionConfig" coverage="33.3" coveredlines="9" coverablelines="27" totallines="93" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="3" totalmethods="6" methodcoverage="50" />
-      <Class name="Futureverse.UBF.Runtime.Execution.ExecutionData" coverage="0" coveredlines="0" coverablelines="26" totallines="78" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="Futureverse.UBF.Runtime.Execution.ExecutionData" coverage="0" coveredlines="0" coverablelines="26" totallines="78" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
       <Class name="Futureverse.UBF.Runtime.Execution.ExecutionResult" coverage="0" coveredlines="0" coverablelines="11" totallines="45" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="4" methodcoverage="0" />
       <Class name="Futureverse.UBF.Runtime.Execution.UBFExecutor" coverage="0" coveredlines="0" coverablelines="15" totallines="44" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="1" methodcoverage="0" />
-      <Class name="Futureverse.UBF.Runtime.Execution.UBFRuntimeController" coverage="0" coveredlines="0" coverablelines="24" totallines="74" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="3" methodcoverage="0" />
+      <Class name="Futureverse.UBF.Runtime.Execution.UBFRuntimeController" coverage="0" coveredlines="0" coverablelines="40" totallines="102" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="5" methodcoverage="0" />
       <Class name="Futureverse.UBF.Runtime.ExecutionContext" coverage="47.8" coveredlines="67" coverablelines="140" totallines="341" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="13" totalmethods="24" methodcoverage="54.1" />
       <Class name="Futureverse.UBF.Runtime.GLBReference" coverage="3.4" coveredlines="4" coverablelines="116" totallines="245" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="2" totalmethods="14" methodcoverage="14.2" />
       <Class name="Futureverse.UBF.Runtime.MeshConfig" coverage="0" coveredlines="0" coverablelines="2" totallines="24" branchcoverage="" coveredbranches="0" totalbranches="0" coveredmethods="0" totalmethods="2" methodcoverage="0" />
