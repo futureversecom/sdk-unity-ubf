@@ -15,10 +15,10 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddRenderMode(properties, "Render Mode", "_RenderMode");
 			AddColor(properties, "Base Color", "_Tint");
 			AddBool(properties, "Use Alpha", "_UseAlpha");
-			AddBool(properties, "Use Alpha Tex", "_UseAlphaTex");
+			AddBool(properties, "UseAlphaTex", "_UseAlphaTex");
 			AddFloat(properties, "Fresnel_IOR", "_Fresnel_IOR");
 			AddFloat(properties, "Opacity", "_Opacity");
-			AddTexture(properties, "Alpha Tex", "_AlphaTex");
+			AddTexture(properties, "AlphaTex", "_AlphaTex");
 
 			AddBool(properties, "Use Emission", "_USEEMISSION");
 			AddBool(properties, "Use Emissive Tint", "_UseEmissiveTint");
