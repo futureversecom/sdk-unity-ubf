@@ -39,7 +39,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			var index = smr.sharedMesh.GetBlendShapeIndex(blendShapeId);
 			if (index == -1)
 			{
-				UbfLogger.LogError($"[SetBlendShape] Invalid blend shape ID: {blendShapeId}");
+				UbfLogger.LogWarn($"[SetBlendShape] Invalid blend shape ID: {blendShapeId}");
 				return;
 			}
 
