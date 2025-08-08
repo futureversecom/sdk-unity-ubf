@@ -7,33 +7,34 @@ using UnityEditor;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Settings
 {
 	public class UBFSettings : ScriptableObject
 	{
 		private const string MyCustomSettingsPath = "Assets/Resources/UBF.asset";
-
-		[SerializeField] private Material _decalOpaque;
-		[SerializeField] private Material _decalTransparent;
-		[SerializeField] private Material _furOpaque;
-		[SerializeField] private Material _furTransparent;
-		[SerializeField] private Material _pbrOpaque;
-		[SerializeField] private Material _pbrTransparent;
-		[SerializeField] private Material _hair;
-		[SerializeField] private Material _skin;
-		[SerializeField] private Material _skin02;
+		
+		[SerializeField] private AssetReferenceT<Material> _decalOpaque;
+		[SerializeField] private AssetReferenceT<Material> _decalTransparent;
+		[SerializeField] private AssetReferenceT<Material> _furOpaque;
+		[SerializeField] private AssetReferenceT<Material> _furTransparent;
+		[SerializeField] private AssetReferenceT<Material> _pbrOpaque;
+		[SerializeField] private AssetReferenceT<Material> _pbrTransparent;
+		[SerializeField] private AssetReferenceT<Material> _hair;
+		[SerializeField] private AssetReferenceT<Material> _skin;
+		[SerializeField] private AssetReferenceT<Material> _skin02;
 		[SerializeField] private List<MeshConfigEntry> _meshConfigs;
 		[SerializeField] private AnimationCurve _lodFalloffCurve;
-		public Material DecalOpaque => _decalOpaque;
-		public Material DecalTransparent => _decalTransparent;
-		public Material FurOpaque => _furOpaque;
-		public Material FurTransparent => _furTransparent;
-		public Material PbrOpaque => _pbrOpaque;
-		public Material PbrTransparent => _pbrTransparent;
-		public Material Hair => _hair;
-		public Material Skin => _skin;
-		public Material Skin02 => _skin02;
+		public AssetReferenceT<Material> DecalOpaque => _decalOpaque;
+		public AssetReferenceT<Material> DecalTransparent => _decalTransparent;
+		public AssetReferenceT<Material> FurOpaque => _furOpaque;
+		public AssetReferenceT<Material> FurTransparent => _furTransparent;
+		public AssetReferenceT<Material> PbrOpaque => _pbrOpaque;
+		public AssetReferenceT<Material> PbrTransparent => _pbrTransparent;
+		public AssetReferenceT<Material> Hair => _hair;
+		public AssetReferenceT<Material> Skin => _skin;
+		public AssetReferenceT<Material> Skin02 => _skin02;
 		public AnimationCurve LodFalloffCurve => _lodFalloffCurve;
 
 		[Serializable]
@@ -76,38 +77,38 @@ namespace Futureverse.UBF.Runtime.Settings
 
 		private void OnValidate()
 		{
-			if (_decalOpaque == null)
-			{
-				_decalOpaque = UnityEngine.Resources.Load("Materials/M_Decal_Opaque") as Material;
-			}
-			if (_decalTransparent == null)
-			{
-				_decalTransparent = UnityEngine.Resources.Load("Materials/M_Decal_Transparent_Alpha") as Material;
-			}
-			if (_furOpaque == null)
-			{
-				_furOpaque = UnityEngine.Resources.Load("Materials/M_Fur_Opaque") as Material;
-			}
-			if (_furTransparent == null)
-			{
-				_furTransparent = UnityEngine.Resources.Load("Materials/M_Fur_Transparent_Alpha") as Material;
-			}
-			if (_pbrOpaque == null)
-			{
-				_pbrOpaque = UnityEngine.Resources.Load("Materials/M_PBR_Opaque") as Material;
-			}
-			if (_pbrTransparent == null)
-			{
-				_pbrTransparent = UnityEngine.Resources.Load("Materials/M_PBR_Transparent_Alpha") as Material;
-			}
-			if (_hair == null)
-			{
-				_hair = UnityEngine.Resources.Load("Materials/M_Hair_Transparent_Alpha_Clipping") as Material;
-			}
-			if (_skin == null)
-			{
-				_skin = UnityEngine.Resources.Load("Materials/M_Skin_Opaque") as Material;
-			}
+			// if (_decalOpaque == null)
+			// {
+			// 	_decalOpaque = UnityEngine.Resources.Load("Materials/M_Decal_Opaque") as Material;
+			// }
+			// if (_decalTransparent == null)
+			// {
+			// 	_decalTransparent = UnityEngine.Resources.Load("Materials/M_Decal_Transparent_Alpha") as Material;
+			// }
+			// if (_furOpaque == null)
+			// {
+			// 	_furOpaque = UnityEngine.Resources.Load("Materials/M_Fur_Opaque") as Material;
+			// }
+			// if (_furTransparent == null)
+			// {
+			// 	_furTransparent = UnityEngine.Resources.Load("Materials/M_Fur_Transparent_Alpha") as Material;
+			// }
+			// if (_pbrOpaque == null)
+			// {
+			// 	_pbrOpaque = UnityEngine.Resources.Load("Materials/M_PBR_Opaque") as Material;
+			// }
+			// if (_pbrTransparent == null)
+			// {
+			// 	_pbrTransparent = UnityEngine.Resources.Load("Materials/M_PBR_Transparent_Alpha") as Material;
+			// }
+			// if (_hair == null)
+			// {
+			// 	_hair = UnityEngine.Resources.Load("Materials/M_Hair_Transparent_Alpha_Clipping") as Material;
+			// }
+			// if (_skin == null)
+			// {
+			// 	_skin = UnityEngine.Resources.Load("Materials/M_Skin_Opaque") as Material;
+			// }
 			if (MeshConfigs == null)
 			{
 				_meshConfigs = new List<MeshConfigEntry>();
