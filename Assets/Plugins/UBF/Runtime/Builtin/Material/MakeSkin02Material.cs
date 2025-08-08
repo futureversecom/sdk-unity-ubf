@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Settings;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -47,7 +48,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddFloat(properties, "Face Paint Opacity", "_FacePaintOpacity");
 		}
 
-		protected override Material GetMaterial
+		protected override AssetReferenceT<Material> GetMaterial
 			=> UBFSettings.GetOrCreateSettings()
 				.Skin02;
 	}

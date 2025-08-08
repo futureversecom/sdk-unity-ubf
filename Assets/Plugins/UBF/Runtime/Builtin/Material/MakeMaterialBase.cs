@@ -1,14 +1,17 @@
 // Copyright (c) 2025, Futureverse Corporation Limited. All rights reserved.
 
+using System.Collections;
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Utils;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
 	public class MaterialValue
 	{
-		public Material Material;
+		public AssetReferenceT<Material> Material;
 		public Dictionary<string, object> Properties;
 	}
 	
@@ -34,12 +37,12 @@ namespace Futureverse.UBF.Runtime.Builtin
 		/// </summary>
 		/// <param name="dictionary">The dictionary to add properties to</param>
 		protected abstract void AddProperties(Dictionary<string, object> dictionary);
-
+		
 		/// <summary>
 		/// Return the material that this node customizes properties for
 		/// </summary>
-		protected abstract Material GetMaterial { get; }
-
+		protected abstract AssetReferenceT<Material> GetMaterial { get; }
+		
 		protected void AddRenderMode(
 			Dictionary<string, object> propertiesDictionary,
 			string resourceName,

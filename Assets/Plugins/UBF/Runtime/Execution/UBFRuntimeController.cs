@@ -3,6 +3,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Futureverse.UBF.Runtime.Builtin;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,6 +18,8 @@ namespace Futureverse.UBF.Runtime.Execution
 		[SerializeField] private bool _disableWhileExecuting;
 		[SerializeField] private bool _destroyPreviousOnExecute = true;
 		[SerializeField] private UnityEvent<ExecutionResult> _onExecutionComplete;
+
+		private ExecutionResult _previousExecutionResult;
 
 		/// <summary>
 		/// Calls UBFExecutor.ExecuteRoutine while optionally clearing GameObject spawned by the previous execution, and
@@ -41,8 +44,12 @@ namespace Futureverse.UBF.Runtime.Execution
 				transform.gameObject.SetActive(false);
 			}
 			
-			onComplete += (x) => _onExecutionComplete.Invoke(x);
-
+			onComplete += (x) =>
+			{
+				_previousExecutionResult = x;
+				_onExecutionComplete.Invoke(x);
+			};
+			
 			yield return UBFExecutor.ExecuteRoutine(
 				new ExecutionData(
 					transform,
@@ -73,7 +80,11 @@ namespace Futureverse.UBF.Runtime.Execution
 				transform.gameObject.SetActive(false);
 			}
 			
-			executionData.OnComplete += (x) => _onExecutionComplete.Invoke(x);
+			executionData.OnComplete += (x) =>
+			{
+				_previousExecutionResult = x;
+				_onExecutionComplete.Invoke(x);
+			};
 
 			yield return UBFExecutor.ExecuteRoutine(
 				executionData,
@@ -96,6 +107,8 @@ namespace Futureverse.UBF.Runtime.Execution
 				Destroy(child.gameObject);
 			}
 
+			_previousExecutionResult?.UnloadAllMaterialOperationHandles();
+			_previousExecutionResult = null;
 			UnityEngine.Resources.UnloadUnusedAssets();
 		}
 	}

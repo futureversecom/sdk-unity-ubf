@@ -7,6 +7,8 @@ using Futureverse.UBF.Runtime.Builtin;
 using Futureverse.UBF.Runtime.Resources;
 using GLTFast;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Futureverse.UBF.Runtime.Execution
 {
@@ -17,6 +19,15 @@ namespace Futureverse.UBF.Runtime.Execution
 		/// </summary>
 		Transform GetRootTransform { get; }
 		void RegisterRuntimeResource(ResourceData resourceData);
+		
+		public IReadOnlyDictionary<string, AsyncOperationHandle> MaterialOperationHandles { get; }
+		
+		bool TryAddMaterialOperationHandle(string materialId, AsyncOperationHandle handle);
+		/// <summary>
+		/// Releases all the material handles that were loaded for this execution
+		/// </summary>
+		void UnloadAllMaterialOperationHandles();
+		
 		/// <summary>
 		/// If ResourceId is an Instance ID, tries to retrieve a preloaded Blueprint. Otherwise, downloads the Blueprint from a Catalog.
 		/// </summary>
@@ -46,10 +57,29 @@ namespace Futureverse.UBF.Runtime.Execution
 		public Transform GetRootTransform { get; }
 
 		private readonly Dictionary<string, Blueprint> _loadedBlueprints;
+		public IReadOnlyDictionary<string, AsyncOperationHandle> MaterialOperationHandles => _materialOperationHandles;
+		private readonly Dictionary<string, AsyncOperationHandle> _materialOperationHandles = new ();
 
 		public void RegisterRuntimeResource(ResourceData resourceData)
 		{
 			ArtifactProvider.Instance.RegisterRuntimeResource(resourceData.Id, resourceData);
+		}
+
+		public bool TryAddMaterialOperationHandle(string materialId, AsyncOperationHandle handle)
+		{
+			return _materialOperationHandles.TryAdd(materialId, handle);
+		}
+
+		public void UnloadAllMaterialOperationHandles()
+		{
+			foreach (var operationHandle in _materialOperationHandles.Values)
+			{
+				if (operationHandle.IsValid())
+				{
+					Addressables.Release(operationHandle);
+				}
+			}
+			_materialOperationHandles.Clear();
 		}
 
 		public IEnumerator GetBlueprintInstance(ResourceId id, Action<Blueprint, BlueprintAssetImportSettings> callback)

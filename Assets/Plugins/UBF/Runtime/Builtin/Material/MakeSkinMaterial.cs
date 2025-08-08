@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Settings;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -46,8 +47,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddFloat(properties, "Scar Normal Strength", "_ScarNormalStrength");
 		}
 
-		protected override Material GetMaterial
-			=> UBFSettings.GetOrCreateSettings()
-				.Skin;
+		protected override AssetReferenceT<Material> GetMaterial
+			=> UBFSettings.GetOrCreateSettings().Skin;
 	}
 }

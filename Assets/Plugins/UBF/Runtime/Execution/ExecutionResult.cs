@@ -33,6 +33,8 @@ namespace Futureverse.UBF.Runtime.Execution
 			}
 		}
 
+		public void UnloadAllMaterialOperationHandles() => _executionContext.Config.UnloadAllMaterialOperationHandles();
+
 		private readonly ExecutionContext _executionContext;
 		private Dictionary<string, object> _blueprintOutputs;
 		

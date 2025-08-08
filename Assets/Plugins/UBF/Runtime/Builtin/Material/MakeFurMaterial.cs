@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Settings;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -37,7 +38,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddTexture(properties, "Id Map", "_IdMap");
 		}
 
-		protected override Material GetMaterial => 
+		protected override AssetReferenceT<Material> GetMaterial =>
 			TryRead<bool>("Use Alpha", out var property) && property ?
 				UBFSettings.GetOrCreateSettings().FurTransparent :
 				UBFSettings.GetOrCreateSettings().FurOpaque;
