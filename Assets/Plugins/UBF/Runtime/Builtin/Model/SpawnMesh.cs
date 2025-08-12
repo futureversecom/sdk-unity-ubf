@@ -22,7 +22,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield break;
 			}
 
-			if (!TryRead<Transform>("Parent", out var parent))
+			if (!TryRead<SceneNode>("Parent", out var parent))
 			{
 				UbfLogger.LogError("[SpawnMesh] Could not find input \"Parent\"");
 				yield break;
@@ -67,11 +67,11 @@ namespace Futureverse.UBF.Runtime.Builtin
 					{
 						importSettings.LODMeshIdentifier,
 					};
-				instantiator = new UbfMeshInstantiator(gltfResource, parent, validMeshNames);
+				instantiator = new UbfMeshInstantiator(gltfResource, parent.TargetSceneObject.transform, validMeshNames);
 			}
 			else
 			{
-				instantiator = new GameObjectInstantiator(gltfResource, parent);
+				instantiator = new GameObjectInstantiator(gltfResource, parent.TargetSceneObject.transform);
 			}
 
 			instantiator.MeshAdded += MeshAddedCallback;
@@ -83,14 +83,19 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield return instantiateRoutine;
 			}
 			
-			var glbReference = parent.gameObject.AddComponent<GLBReference>();
+			var glbReference = parent.TargetSceneObject.AddComponent<GLBReference>();
 			glbReference.GLTFImport = gltfResource;
-			var animator = parent.gameObject.GetComponentInParent<Animator>(includeInactive: true);
+			var animator = parent.TargetSceneObject.GetComponentInParent<Animator>(includeInactive: true);
 			
 			// Extra yield here as we can't be sure that the mesh will be instantiated fully after the above task finishes
 			yield return null;
 			
-			ApplyRuntimeConfig(runtimeConfig, animator);
+			ApplyRuntimeConfig(runtimeConfig);
+			
+			foreach (var node in Transforms)
+			{
+				parent.Children.Add(node);
+			}
 			
 			WriteOutput("Renderers", Renderers);
 			WriteOutput("Scene Nodes", Transforms);

@@ -13,7 +13,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryRead<Transform>("Root", out var rootTransform))
+			if (!TryRead<SceneNode>("Root", out var node))
 			{
 				UbfLogger.LogError("[FindSceneNodes] Could not find input \"Root\"");
 				return;
@@ -25,13 +25,14 @@ namespace Futureverse.UBF.Runtime.Builtin
 				return;
 			}
 
-			var nodeArray = new List<Transform>();
-			FindNodes(filter, rootTransform, node => { nodeArray.Add(node); });
+			var nodeArray = new List<SceneNode>();
+			FindNodes(filter, node, foundNode => { nodeArray.Add(foundNode); });
 			WriteOutput("Nodes", nodeArray);
 		}
 
-		private static void FindNodes(string filter, Transform root, Action<Transform> action)
+		private static void FindNodes(string filter, SceneNode root, Action<SceneNode> action)
 		{
+			/*
 			foreach (Transform child in root)
 			{
 				// TODO: support more comprehensive filtering (perhaps a glob pattern?)
@@ -40,6 +41,16 @@ namespace Futureverse.UBF.Runtime.Builtin
 					action(child);
 				}
 
+				FindNodes(filter, child, action);
+			}*/
+
+			foreach (var child in root.Children)
+			{
+				if (child.TargetSceneObject.name.StartsWith(filter))
+				{
+					action(child);
+				}
+				
 				FindNodes(filter, child, action);
 			}
 		}

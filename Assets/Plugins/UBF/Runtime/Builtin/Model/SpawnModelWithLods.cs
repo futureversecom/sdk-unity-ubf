@@ -43,7 +43,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield break;
 			}
 
-			if (!TryRead<Transform>("Parent", out var parent))
+			if (!TryRead<SceneNode>("Parent", out var parent))
 			{
 				UbfLogger.LogError("[SpawnModelWithLODs] Could not find input \"Parent\"");
 				yield break;
@@ -55,7 +55,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			}
 			
 			var lodParent = new GameObject("LODGroup");
-			lodParent.transform.SetParent(parent);
+			lodParent.transform.SetParent(parent.TargetSceneObject.transform);
 			_lodGroup = lodParent.AddComponent<LODGroup>();
 			
 			_numLods = resources.Count;
@@ -72,12 +72,17 @@ namespace Futureverse.UBF.Runtime.Builtin
 			}
 			
 			_lodGroup.SetLODs(_lods);
-			var animator = parent.gameObject.GetComponentInParent<Animator>(includeInactive: true);
+			var animator = parent.TargetSceneObject.GetComponentInParent<Animator>(includeInactive: true);
 			
 			// Extra yield here as we can't be sure that the mesh will be instantiated fully after the above task finishes
 			yield return null;
 			
-			ApplyRuntimeConfig(runtimeConfig, animator);
+			ApplyRuntimeConfig(runtimeConfig);
+			
+			foreach (var node in Transforms)
+			{
+				parent.Children.Add(node);
+			}
 			
 			WriteOutput("Renderers", Renderers);
 			WriteOutput("Scene Nodes", Transforms);
@@ -136,19 +141,31 @@ namespace Futureverse.UBF.Runtime.Builtin
 			float[] morphTargetWeights,
 			int meshNumeration)
 		{
-			Transforms.Add(gameObject.transform);
+			var node = new SceneNode
+			{
+				TargetSceneObject = gameObject
+			};
+			Transforms.Add(node);
 			var renderer = gameObject.GetComponent<Renderer>();
 			if (renderer == null)
 			{
 				return;
 			}
 
-			Renderers.Add(renderer);
-			if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+			var renderComponent = new MeshRendererSceneComponent()
 			{
-				SkinnedMeshRenderers.Add(skinnedMeshRenderer);
+				Node = node,
+				TargetMeshRenderer = renderer,
+				skinned = (renderer is SkinnedMeshRenderer)
+			};
+			
+			Renderers.Add(renderComponent);
+			if (renderComponent.skinned)
+			{
+				SkinnedMeshRenderers.Add(renderComponent);
 			}
-
+			node.Components.Add(renderComponent);
+			
 			var lodSample = (_currentLodNum + 1) / (float)_numLods;
 			var lodDistanceFactor = UBFSettings.GetOrCreateSettings()
 				.LodFalloffCurve.Evaluate(lodSample);

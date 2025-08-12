@@ -11,9 +11,9 @@ namespace Futureverse.UBF.Runtime.Builtin
 {
 	public class SpawnModel : ACustomExecNode
 	{
-		protected readonly List<Renderer> Renderers = new();
-		protected readonly List<Transform> Transforms = new();
-		protected readonly List<SkinnedMeshRenderer> SkinnedMeshRenderers = new();
+		protected readonly List<MeshRendererSceneComponent> Renderers = new();
+		protected readonly List<SceneNode> Transforms = new();
+		protected readonly List<MeshRendererSceneComponent> SkinnedMeshRenderers = new();
 		
 		public SpawnModel(Context context) : base(context) { }
 
@@ -25,7 +25,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield break;
 			}
 
-			if (!TryRead<Transform>("Parent", out var parent))
+			if (!TryRead<SceneNode>("Parent", out var parent))
 			{
 				UbfLogger.LogError("[SpawnModel] Could not find input \"Parent\"");
 				yield break;
@@ -57,7 +57,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield break;
 			}
 			
-			var instantiator = new GameObjectInstantiator(gltfResource, parent);
+			var instantiator = new GameObjectInstantiator(gltfResource, parent.TargetSceneObject.transform);
 			instantiator.MeshAdded += MeshAddedCallback;
 
 			var instantiateRoutine = CoroutineHost.Instance.StartCoroutine(
@@ -68,15 +68,18 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield return instantiateRoutine;
 			}
 			
-			var glbReference = parent.gameObject.AddComponent<GLBReference>();
+			var glbReference = parent.TargetSceneObject.AddComponent<GLBReference>();
 			glbReference.GLTFImport = gltfResource;
-			var animator = parent.gameObject.GetComponentInParent<Animator>(includeInactive: true);
 			
 			// Extra yield here as we can't be sure that the mesh will be instantiated fully after the above task finishes
 			yield return null;
 			
-			ApplyRuntimeConfig(runtimeConfig, animator);
-			
+			ApplyRuntimeConfig(runtimeConfig);
+
+			foreach (var node in Transforms)
+			{
+				parent.Children.Add(node);
+			}
 			WriteOutput("Renderers", Renderers);
 			WriteOutput("Scene Nodes", Transforms);
 		}
@@ -91,23 +94,34 @@ namespace Futureverse.UBF.Runtime.Builtin
 			float[] morphTargetWeights,
 			int meshNumeration)
 		{
-			Transforms.Add(gameObject.transform);
+			var node = new SceneNode()
+			{
+				TargetSceneObject = gameObject
+			};
+			Transforms.Add(node);
 			var renderer = gameObject.GetComponent<Renderer>();
 			if (renderer == null)
 			{
 				return;
 			}
 
-			Renderers.Add(renderer);
-			if (renderer is SkinnedMeshRenderer skinnedMeshRenderer)
+			var renderComponent = new MeshRendererSceneComponent()
 			{
-				SkinnedMeshRenderers.Add(skinnedMeshRenderer);
+				Node = node,
+				TargetMeshRenderer = renderer,
+				skinned = (renderer is SkinnedMeshRenderer)
+			};
+			Renderers.Add(renderComponent);
+			if (renderComponent.skinned)
+			{
+				SkinnedMeshRenderers.Add(renderComponent);
 			}
+			node.Components.Add(renderComponent);
 		}
 
-		protected void ApplyRuntimeConfig(RuntimeMeshConfig runtimeConfig, Animator animator)
+		protected void ApplyRuntimeConfig(RuntimeMeshConfig runtimeConfig)
 		{
-			if (runtimeConfig == null || runtimeConfig.RuntimeObject == null || SkinnedMeshRenderers.Count <= 0)
+			if (runtimeConfig == null || runtimeConfig.AnimationObject == null || SkinnedMeshRenderers.Count <= 0)
 			{
 				return;
 			}
@@ -115,14 +129,17 @@ namespace Futureverse.UBF.Runtime.Builtin
 			foreach (var renderer in SkinnedMeshRenderers)
 			{
 				UbfLogger.LogInfo(
-					$"[{GetType().Name}] Retargeting \"{renderer.name}\" with spawned config \"{runtimeConfig.Config.name}\""
+					$"[{GetType().Name}] Retargeting \"{renderer.TargetMeshRenderer.name}\" with spawned config \"{runtimeConfig.Config.name}\""
 				);
-				RigUtils.RetargetRig(runtimeConfig.RuntimeObject.transform, renderer);
-			}
-				
-			if (animator != null && runtimeConfig.Config.Avatar != null)
-			{
-				animator.avatar = runtimeConfig.Config.Avatar;
+				var runtimeSMR = runtimeConfig.AnimationObject.GetComponentInChildren<SkinnedMeshRenderer>();
+				if (runtimeSMR != null)
+				{
+					RigUtils.RetargetRig(runtimeSMR, renderer.TargetMeshRenderer as SkinnedMeshRenderer); // Assume if it lives in SkinnedMeshRenderers that it fits the type
+				}
+				else
+				{
+					RigUtils.RetargetRig(runtimeConfig.AnimationObject.transform, renderer.TargetMeshRenderer as SkinnedMeshRenderer);
+				}
 			}
 		}
 	}

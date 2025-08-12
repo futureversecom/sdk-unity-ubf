@@ -12,13 +12,13 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryReadArray<Renderer>("Mesh", out var meshes))
+			if (!TryReadArray<MeshRendererSceneComponent>("Mesh", out var meshes))
 			{
 				UbfLogger.LogError("[BindMeshes] Could not find input \"Mesh\"");
 				return;
 			}
 
-			if (!TryRead<Renderer>("Skeleton", out var skeleton))
+			if (!TryRead<MeshRendererSceneComponent>("Skeleton", out var skeleton))
 			{
 				UbfLogger.LogError("[BindMeshes] Could not find input \"Skeleton\"");
 				return;
@@ -27,13 +27,14 @@ namespace Futureverse.UBF.Runtime.Builtin
 			Bind(skeleton, meshes);
 		}
 
-		private void Bind(Renderer skeleton, List<Renderer> targetSkins)
+		private void Bind(MeshRendererSceneComponent skeleton, List<MeshRendererSceneComponent> targetSkins)
 		{
-			if (skeleton is not SkinnedMeshRenderer skinnedSkeleton)
+			if (!skeleton.skinned)
 			{
 				return;
 			}
 
+			var skinnedSkeleton = skeleton.TargetMeshRenderer as SkinnedMeshRenderer;
 			var rootBone = skinnedSkeleton.rootBone;
 			var boneDictionary = new Dictionary<string, Transform>();
 			var rootBoneChildren = rootBone.GetComponentsInChildren<Transform>();
@@ -44,11 +45,12 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 			foreach (var targetSkin in targetSkins)
 			{
-				if (targetSkin is not SkinnedMeshRenderer skin)
+				if (!targetSkin.skinned)
 				{
 					continue;
 				}
 
+				var skin = targetSkin.TargetMeshRenderer as SkinnedMeshRenderer;
 				var newBones = new Transform[skin.bones.Length];
 				for (var i = 0; i < skin.bones.Length; i++)
 				{

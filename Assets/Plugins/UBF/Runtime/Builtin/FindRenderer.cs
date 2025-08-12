@@ -12,7 +12,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryReadArray<Renderer>("Array", out var array))
+			if (!TryReadArray<MeshRendererSceneComponent>("Array", out var array))
 			{
 				UbfLogger.LogError("[FindRenderer] Could not find input \"Array\"");
 				return;
@@ -24,7 +24,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				return;
 			}
 
-			var renderer = array.FirstOrDefault(x => x.name == name);
+			var renderer = array.FirstOrDefault(x => x.TargetMeshRenderer.name == name);
 			WriteOutput("Renderer", renderer);
 		}
 	}
