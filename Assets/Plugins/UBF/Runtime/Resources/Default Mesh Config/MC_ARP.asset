@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73932d3d27b79af4ba9134813fa862e8, type: 3}
+  m_Name: MC_ARP
+  m_EditorClassIdentifier: 
+  Avatar: {fileID: 9000000, guid: a741e8cb2235a7f4cba11daf7991c6b3, type: 3}
+  _rigPrefab: {fileID: 7919699185871141835, guid: d888ea26c9f82b14a9131869d1c6bac9, type: 3}
+  avatarMap:
+  - targetBoneName: root.x
+    sourceBoneName: Hips
+  - targetBoneName: thigh_stretch.l
+    sourceBoneName: LeftUpperLeg
+  - targetBoneName: thigh_stretch.r
+    sourceBoneName: RightUpperLeg
+  - targetBoneName: leg_stretch.l
+    sourceBoneName: LeftLowerLeg
+  - targetBoneName: leg_stretch.r
+    sourceBoneName: RightLowerLeg
+  - targetBoneName: foot.l
+    sourceBoneName: LeftFoot
+  - targetBoneName: foot.r
+    sourceBoneName: RightFoot
+  - targetBoneName: spine_01.x
+    sourceBoneName: Spine
+  - targetBoneName: spine_02.x
+    sourceBoneName: Chest
+  - targetBoneName: neck.x
+    sourceBoneName: Neck
+  - targetBoneName: head.x
+    sourceBoneName: Head
+  - targetBoneName: shoulder.l
+    sourceBoneName: LeftShoulder
+  - targetBoneName: shoulder.r
+    sourceBoneName: RightShoulder
+  - targetBoneName: arm_stretch.l
+    sourceBoneName: LeftUpperArm
+  - targetBoneName: arm_stretch.r
+    sourceBoneName: RightUpperArm
+  - targetBoneName: forearm_stretch.l
+    sourceBoneName: LeftLowerArm
+  - targetBoneName: forearm_stretch.r
+    sourceBoneName: RightLowerArm
+  - targetBoneName: hand.l
+    sourceBoneName: LeftHand
+  - targetBoneName: hand.r
+    sourceBoneName: RightHand
+  - targetBoneName: toes_01.l
+    sourceBoneName: LeftToes
+  - targetBoneName: toes_01.r
+    sourceBoneName: RightToes
+  - targetBoneName: c_thumb1.l
+    sourceBoneName: Left Thumb Proximal
+  - targetBoneName: c_thumb2.l
+    sourceBoneName: Left Thumb Intermediate
+  - targetBoneName: c_thumb3.l
+    sourceBoneName: Left Thumb Distal
+  - targetBoneName: c_index1.l
+    sourceBoneName: Left Index Proximal
+  - targetBoneName: c_index2.l
+    sourceBoneName: Left Index Intermediate
+  - targetBoneName: c_index3.l
+    sourceBoneName: Left Index Distal
+  - targetBoneName: c_middle1.l
+    sourceBoneName: Left Middle Proximal
+  - targetBoneName: c_middle2.l
+    sourceBoneName: Left Middle Intermediate
+  - targetBoneName: c_middle3.l
+    sourceBoneName: Left Middle Distal
+  - targetBoneName: c_ring1.l
+    sourceBoneName: Left Ring Proximal
+  - targetBoneName: c_ring2.l
+    sourceBoneName: Left Ring Intermediate
+  - targetBoneName: c_ring3.l
+    sourceBoneName: Left Ring Distal
+  - targetBoneName: c_thumb1.r
+    sourceBoneName: Right Thumb Proximal
+  - targetBoneName: c_thumb2.r
+    sourceBoneName: Right Thumb Intermediate
+  - targetBoneName: c_thumb3.r
+    sourceBoneName: Right Thumb Distal
+  - targetBoneName: c_index1.r
+    sourceBoneName: Right Index Proximal
+  - targetBoneName: c_index2.r
+    sourceBoneName: Right Index Intermediate
+  - targetBoneName: c_index3.r
+    sourceBoneName: Right Index Distal
+  - targetBoneName: c_middle1.r
+    sourceBoneName: Right Middle Proximal
+  - targetBoneName: c_middle2.r
+    sourceBoneName: Right Middle Intermediate
+  - targetBoneName: c_middle3.r
+    sourceBoneName: Right Middle Distal
+  - targetBoneName: c_ring1.r
+    sourceBoneName: Right Ring Proximal
+  - targetBoneName: c_ring2.r
+    sourceBoneName: Right Ring Intermediate
+  - targetBoneName: c_ring3.r
+    sourceBoneName: Right Ring Distal
+  - targetBoneName: spine_03.x
+    sourceBoneName: UpperChest
