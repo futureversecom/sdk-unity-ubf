@@ -34,22 +34,26 @@ namespace Futureverse.UBF.Runtime.Builtin
 				UbfLogger.LogError("[SetBlendShape] Target renderer is not skinned");
 				return;
 			}
+
+			foreach (var mRender in rendererComponent.TargetMeshRenderers)
+			{
+				var smr = mRender as SkinnedMeshRenderer;
+				if (smr == null)
+				{
+					UbfLogger.LogError("[SetBlendShape] Mesh Renderer component is not skinned");
+					continue;
+				}
+
+				var index = smr.sharedMesh.GetBlendShapeIndex(blendShapeId);
+				if (index == -1)
+				{
+					UbfLogger.LogError($"[SetBlendShape] Cannot find blend-shape on renderer. Blend ID: {blendShapeId}");
+					continue;
+				}
+
+				smr.SetBlendShapeWeight(index, blendShapeValue);
+			}
 			
-			var smr = rendererComponent.TargetMeshRenderer as SkinnedMeshRenderer;
-			if (smr == null)
-			{
-				UbfLogger.LogError("[SetBlendShape] No Skinned Mesh Renderer on target transform");
-				return;
-			}
-
-			var index = smr.sharedMesh.GetBlendShapeIndex(blendShapeId);
-			if (index == -1)
-			{
-				UbfLogger.LogError($"[SetBlendShape] Invalid blend shape ID: {blendShapeId}");
-				return;
-			}
-
-			smr.SetBlendShapeWeight(index, blendShapeValue);
 		}
 	}
 }

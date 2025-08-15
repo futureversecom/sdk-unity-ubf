@@ -60,6 +60,11 @@ namespace Futureverse.UBF.Runtime.Builtin
 			
 			_numLods = resources.Count;
 			_lods = new LOD[_numLods];
+
+			var rootNode = new SceneNode()
+			{
+				TargetSceneObject = lodParent
+			};
 			
 			foreach (var resource in resources)
 			{
@@ -77,15 +82,32 @@ namespace Futureverse.UBF.Runtime.Builtin
 			// Extra yield here as we can't be sure that the mesh will be instantiated fully after the above task finishes
 			yield return null;
 			
-			ApplyRuntimeConfig(runtimeConfig);
-			
-			foreach (var node in Transforms)
+			if (Renderers.Count > 0) // There will be one renderer component with all meshes in it
 			{
-				parent.Children.Add(node);
+				rootNode.AddComponent(Renderers[0]);
+				rootNode.Name = Renderers[0].TargetMeshRenderers[0].gameObject.name;
+
+				if (Renderers[0].skinned)
+				{
+					var rigRoot = (Renderers[0].TargetMeshRenderers[0] as SkinnedMeshRenderer).rootBone;
+					var rigRootNode = SceneNode.BuildSceneTree(rigRoot, out var boneNodes);
+					var rig = new RigSceneComponent
+					{
+						Node = rootNode,
+						Bones = boneNodes,
+						Root = rigRootNode
+					};
+
+					rootNode.AddComponent(rig);
+				}
 			}
 			
-			WriteOutput("Renderers", Renderers);
-			WriteOutput("Scene Nodes", Transforms);
+			parent.AddChild(rootNode);
+			
+			ApplyRuntimeConfig(runtimeConfig);
+			
+			WriteOutput("Renderer", Renderers.FirstOrDefault());
+			WriteOutput("Scene Node", rootNode);
 		}
 
 		private IEnumerator LoadLodResource(ResourceId resourceId)
@@ -141,30 +163,21 @@ namespace Futureverse.UBF.Runtime.Builtin
 			float[] morphTargetWeights,
 			int meshNumeration)
 		{
-			var node = new SceneNode
-			{
-				TargetSceneObject = gameObject
-			};
-			Transforms.Add(node);
 			var renderer = gameObject.GetComponent<Renderer>();
 			if (renderer == null)
 			{
 				return;
 			}
 
-			var renderComponent = new MeshRendererSceneComponent()
+			if (Renderers.Count == 0) // Only one mesh renderer on an lod spawn, that contains all the lod meshes within it
 			{
-				Node = node,
-				TargetMeshRenderer = renderer,
-				skinned = (renderer is SkinnedMeshRenderer)
-			};
-			
-			Renderers.Add(renderComponent);
-			if (renderComponent.skinned)
-			{
-				SkinnedMeshRenderers.Add(renderComponent);
+				Renderers.Add(new MeshRendererSceneComponent()
+				{
+					skinned = renderer is SkinnedMeshRenderer
+				});
 			}
-			node.Components.Add(renderComponent);
+
+			Renderers[0].TargetMeshRenderers.Add(renderer);
 			
 			var lodSample = (_currentLodNum + 1) / (float)_numLods;
 			var lodDistanceFactor = UBFSettings.GetOrCreateSettings()

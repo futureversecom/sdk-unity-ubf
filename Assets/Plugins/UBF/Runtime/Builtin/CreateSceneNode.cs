@@ -19,13 +19,14 @@ namespace Futureverse.UBF.Runtime.Builtin
 			var gameObject = new GameObject(nodeName);
 			var node = new SceneNode
 			{
-				TargetSceneObject = gameObject
+				TargetSceneObject = gameObject,
+				Name = nodeName
 			};
 
 			if (TryRead<SceneNode>("Parent", out var parent) && parent != null)
 			{
 				gameObject.transform.SetParent(parent.TargetSceneObject.transform);
-				parent.Children.Add(node);
+				parent.AddChild(node);
 			}
 			else
 			{

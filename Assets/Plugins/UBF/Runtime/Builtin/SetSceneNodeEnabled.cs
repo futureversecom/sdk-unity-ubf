@@ -1,8 +1,6 @@
 // Copyright (c) 2025, Futureverse Corporation Limited. All rights reserved.
 
 using Futureverse.UBF.Runtime.Utils;
-using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {

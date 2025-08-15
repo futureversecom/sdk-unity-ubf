@@ -97,9 +97,13 @@ namespace Futureverse.UBF.Runtime.Builtin
 				}
 			}
 
-			var rMats = renderer.TargetMeshRenderer.materials;
-			rMats[matIndex] = material;
-			renderer.TargetMeshRenderer.materials = rMats;
+			foreach (var mRender in renderer.TargetMeshRenderers)
+			{
+				var rMats = mRender.materials;
+				rMats[matIndex] = material;
+				mRender.materials = rMats;
+			}
+			
 		}
 	}
 }
