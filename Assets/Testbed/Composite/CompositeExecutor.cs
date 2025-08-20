@@ -91,7 +91,13 @@ namespace Testbed.Local
 			
 			var executionData = new ExecutionData(
 				transform,
-				null,
+				r =>
+				{
+					foreach (var kvp in r.BlueprintOutputs)
+					{
+						Debug.Log($"{kvp.Key}, {kvp.Value}");
+					}
+				},
 				blueprints
 			);
 			yield return UBFExecutor.ExecuteRoutine(executionData, _assets[0].InstanceId);
