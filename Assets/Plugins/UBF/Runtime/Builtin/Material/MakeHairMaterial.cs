@@ -3,6 +3,7 @@
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Settings;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -36,8 +37,8 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddFloat(properties, "Roughness", "_Roughness");
 			AddFloat(properties, "Metallic", "_Metallic");
 		}
-		
-		protected override Material GetMaterial => 
+
+		protected override AssetReferenceT<Material> GetMaterial  => 
 			TryRead<bool>("Use Alpha", out var property) && property ?
 				UBFSettings.GetOrCreateSettings().Hair :
 				UBFSettings.GetOrCreateSettings().PbrOpaque;

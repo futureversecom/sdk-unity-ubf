@@ -3,6 +3,8 @@
 using System.Collections;
 using Futureverse.UBF.Runtime.Utils;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -28,9 +30,32 @@ namespace Futureverse.UBF.Runtime.Builtin
 			{
 				matIndex = 0;
 			}
+			
+			Material loadedMat = default;
+			var materialId = materialValue.Material.RuntimeKey.ToString();
+			if (NodeContext.ExecutionContext.Config.MaterialOperationHandles.TryGetValue(materialId, out var operationHandle))
+			{
+				if (operationHandle.IsValid() && operationHandle.IsDone)
+				{
+					loadedMat = operationHandle.Result as Material;
+				}
 
-			var material = new Material(materialValue.Material);
-
+				if (operationHandle.IsValid() && !operationHandle.IsDone)
+				{
+					yield return operationHandle;
+					loadedMat = operationHandle.Result as Material;
+				}
+			}
+			else
+			{
+				operationHandle = materialValue.Material.LoadAssetAsync();
+				NodeContext.ExecutionContext.Config.TryAddMaterialOperationHandle(materialId, operationHandle);
+				yield return operationHandle;
+				loadedMat = operationHandle.Result as Material;
+			}
+			
+			var material = new Material(loadedMat);
+			
 			foreach (var prop in materialValue.Properties)
 			{
 				switch (prop.Value)

@@ -2,7 +2,8 @@
 
 using System.Collections.Generic;
 using Futureverse.UBF.Runtime.Settings;
-using Material = UnityEngine.Material;
+using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace Futureverse.UBF.Runtime.Builtin
 {
@@ -58,8 +59,8 @@ namespace Futureverse.UBF.Runtime.Builtin
 			AddTexture(properties, "Decal Tex", "_DecalTex");
 			AddTexture(properties, "Normal Tex", "_NormalTex");
 		}
-
-		protected override Material GetMaterial => 
+		
+		protected override AssetReferenceT<Material> GetMaterial => 
 			TryRead<bool>("Use Alpha", out var property) && property ?
 				UBFSettings.GetOrCreateSettings().DecalTransparent :
 				UBFSettings.GetOrCreateSettings().DecalOpaque;
