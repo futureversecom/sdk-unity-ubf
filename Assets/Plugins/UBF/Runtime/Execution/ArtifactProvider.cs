@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using Futureverse.UBF.Runtime.Builtin;
 using Futureverse.UBF.Runtime.Resources;
 using Futureverse.UBF.Runtime.Utils;
 using GLTFast;
@@ -58,15 +57,9 @@ namespace Futureverse.UBF.Runtime.Execution
 
 		public IEnumerator GetTextureResource(
 			ResourceId resourceId,
-			TextureImportSettings settings,
 			Action<Texture2D, TextureAssetImportSettings> onComplete)
 		{
 			var loader = new TextureLoader();
-			if (settings != null)
-			{
-				loader.SetSrgb(settings.UseSrgb);
-			}
-
 			return GetResource(
 				resourceId,
 				ResourceType.Texture,

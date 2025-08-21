@@ -42,7 +42,8 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 				if (TryRead(declaredInput, out var dynamic))
 				{
-					blueprint.RegisterVariable(declaredInput, dynamic);
+					// Strip In. prefix
+					blueprint.RegisterVariable(declaredInput[3..], dynamic);
 				}
 			}
 
@@ -54,7 +55,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			{
 				if (execTask.ExecutionContext.TryReadOutput(output.Id, out var value))
 				{
-					WriteOutput(output.Id, value);
+					WriteOutput($"Out.{output.Id}", value);
 				}
 			}
 		}

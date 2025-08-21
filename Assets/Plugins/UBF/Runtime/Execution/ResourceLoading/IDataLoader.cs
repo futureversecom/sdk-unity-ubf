@@ -32,21 +32,9 @@ namespace Futureverse.UBF.Runtime.Resources
 	/// </summary>
 	public class TextureLoader : IDataLoader<Texture2D, TextureAssetImportSettings>
 	{
-		private bool _useSrgb;
-
-		/// <summary>
-		/// Set whether this texture should be in sRGB color space.
-		/// </summary>
-		/// <param name="useSrgb">Use linear color space?</param>
-		public void SetSrgb(bool useSrgb)
-		{
-			_useSrgb = useSrgb;
-		}
-
 		public IEnumerator LoadFromData(byte[] bytes, TextureAssetImportSettings importSettings, Action<Texture2D> onComplete)
 		{
-			// Next major release we can get rid of the _useSrgb member bool, and just use the one from import settings
-			var useSrgb = _useSrgb;
+			var useSrgb = false;
 			if (importSettings != null)
 			{
 				useSrgb = importSettings.IsSrgb;

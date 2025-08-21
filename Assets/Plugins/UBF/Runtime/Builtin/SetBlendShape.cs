@@ -11,15 +11,15 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryRead<Renderer>("Target", out var targetRenderer) || targetRenderer == null)
+			if (!TryRead<Renderer>("Renderer", out var targetRenderer) || targetRenderer == null)
 			{
-				UbfLogger.LogError("[SetBlendShape] Could not find input \"Target\"");
+				UbfLogger.LogError("[SetBlendShape] Could not find input \"Renderer\"");
 				return;
 			}
 			
-			if (!TryRead<string>("ID", out var blendShapeId))
+			if (!TryRead<string>("BlendShapeID", out var blendShapeId))
 			{
-				UbfLogger.LogError("[SetBlendShape] Could not find input \"ID\"");
+				UbfLogger.LogError("[SetBlendShape] Could not find input \"BlendShapeID\"");
 				return;
 			}
 			

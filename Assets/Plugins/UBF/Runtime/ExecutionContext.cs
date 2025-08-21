@@ -290,52 +290,5 @@ namespace Futureverse.UBF.Runtime
 			outputDict.Add(key, value);
 			return true;
 		}
-
-		/// <summary>
-		/// Retrieve a piece of arbitrary user data that was stored earlier in the Blueprint's execution.
-		/// </summary>
-		/// <param name="key">The key under which the data is stored.</param>
-		/// <param name="data">The retrieved data.</param>
-		/// <returns>Whether the data was successfully retrieved.</returns>
-		public bool GetDynamicDataEntry(string key, out Dynamic data)
-		{
-			fixed (char* keyBytes = key)
-			{
-				Native.FFI.Dynamic* dynamic;
-				if (Calls.ctx_get_dynamic_data_entry(
-					NativePtr,
-					(ushort*)keyBytes,
-					key.Length,
-					&dynamic
-				))
-				{
-					data = new Dynamic(dynamic);
-					return true;
-				}
-
-				data = null;
-				return false;
-			}
-		}
-
-		/// <summary>
-		/// Assign an arbitrary piece of user data to the runtime Blueprint. Can be retrieved again any time during the rest of the execution.
-		/// </summary>
-		/// <param name="key">The key by which to index the data, and retrieve it again.</param>
-		/// <param name="data">The data to store.</param>
-		/// <returns>Whether the data was successfully stored.</returns>
-		public bool SetDynamicDataEntry(string key, Dynamic data)
-		{
-			fixed (char* keyBytes = key)
-			{
-				var result = Calls.ctx_set_dynamic_data_entry(
-					NativePtr,
-					(ushort*)keyBytes,
-					key.Length,
-					data.NativePtr
-				);
-				return result;
-			}
-		}
 	}
 }

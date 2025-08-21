@@ -31,7 +31,7 @@ namespace Plugins.UBF.Runtime.Builtin.ResourceLoading
 			);
 			
 			NodeContext.ExecutionContext.Config.RegisterRuntimeResource(resource);
-			WriteOutput("Resource", resourceId);
+			WriteOutput("GLB", resourceId);
 		}
 	}
 }

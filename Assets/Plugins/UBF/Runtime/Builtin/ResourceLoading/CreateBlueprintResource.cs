@@ -30,7 +30,7 @@ namespace Futureverse.UBF.Runtime.Builtin.ResourceLoading
 			);
 			
 			NodeContext.ExecutionContext.Config.RegisterRuntimeResource(resource);
-			WriteOutput("Resource", resourceId);
+			WriteOutput("Blueprint", resourceId);
 		}
 	}
 }
