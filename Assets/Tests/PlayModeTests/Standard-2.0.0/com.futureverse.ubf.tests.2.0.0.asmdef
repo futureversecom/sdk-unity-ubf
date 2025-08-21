@@ -1,5 +1,5 @@
 {
-    "name": "com.futureverse.ubf.tests.0.2.0",
+    "name": "com.futureverse.ubf.tests.2.0.0",
     "rootNamespace": "",
     "references": [
         "UnityEngine.TestRunner",

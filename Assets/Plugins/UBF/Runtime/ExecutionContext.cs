@@ -11,7 +11,7 @@ using Futureverse.UBF.Runtime.Native.FFI;
 using Futureverse.UBF.Runtime.Utils;
 
 [assembly: InternalsVisibleTo("com.futureverse.ubf.tests.utils")]
-[assembly: InternalsVisibleTo("com.futureverse.ubf.tests.0.2.0")]
+[assembly: InternalsVisibleTo("com.futureverse.ubf.tests.2.0.0")]
 
 namespace Futureverse.UBF.Runtime
 {

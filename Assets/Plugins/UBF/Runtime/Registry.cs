@@ -45,7 +45,7 @@ namespace Futureverse.UBF.Runtime
 				.Register<SpawnModelWithLods>("SpawnModelWithLODs")
 				.Register<BindMeshes>()
 				.Register<ApplyMaterial>()
-				.Register<SetBlendShape>("SetBlendshape")
+				.Register<SetBlendShape>()
 				.Register<CreateSceneNode>()
 				.Register<CreateMeshConfig>()
 				.Register<SetSceneNodeEnabled>()

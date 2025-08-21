@@ -132,8 +132,8 @@ public class TestArrayNodes
 			.AddOutputWithNode("Result", "Array<string>")
 			.AddNode(TestGraphBuilder.MakeArray("MakeArray", "string", TestUtils.DefaultList<string>(2)))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("Item1", "MakeArray", "Item.1")
-			.PassInputToNode("Item2", "MakeArray", "Item.2")
+			.PassInputToNode("Item1", "MakeArray", "Element.1")
+			.PassInputToNode("Item2", "MakeArray", "Element.2")
 			.SetOutputFromNode("MakeArray", "Array", "Result")
 			.Build();
 
@@ -162,10 +162,10 @@ public class TestArrayNodes
 			.AddNode(TestGraphBuilder.ToString<int>("ToString", "int"))
 			.ConnectEntry("ForEach")
 			.PassInputToNode("Array", "ForEach", "Array")
-			.ConnectNodes("ForEach", "Loop Body", "DebugLog1", "Exec")
-			.ConnectNodes("ForEach", "Array Element", "DebugLog1", "Message")
+			.ConnectNodes("ForEach", "Loop", "DebugLog1", "Exec")
+			.ConnectNodes("ForEach", "Element", "DebugLog1", "Message")
 			.ConnectExecution("DebugLog1", "DebugLog2")
-			.ConnectNodes("ForEach", "Array Index", "ToString", "Value")
+			.ConnectNodes("ForEach", "Index", "ToString", "Value")
 			.ConnectNodes("ToString", "String", "DebugLog2", "Message")
 			.Build();
 
@@ -231,9 +231,9 @@ public class TestArrayNodes
 			.AddNode(TestWaitForFramesNode("WaitForFrames"))
 			.ConnectEntry("ForEach")
 			.PassInputToNode("Array", "ForEach", "Array")
-			.ConnectNodes("ForEach", "Loop Body", "WaitForFrames", "Exec")
+			.ConnectNodes("ForEach", "Loop", "WaitForFrames", "Exec")
 			.ConnectExecution("WaitForFrames", "DebugLog1")
-			.ConnectNodes("ForEach", "Array Element", "DebugLog1", "Message")
+			.ConnectNodes("ForEach", "Element", "DebugLog1", "Message")
 			.ConnectExecution("ForEach", "DebugLog2")
 			.Build();
 

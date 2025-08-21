@@ -1,7 +1,6 @@
 // Copyright (c) 2025, Futureverse Corporation Limited. All rights reserved.
 
 using System.Collections;
-using System.Collections.Generic;
 using NUnit.Framework;
 using UnitTests.PlayModeTests.Utils;
 using UnityEngine;
@@ -50,7 +49,9 @@ public class TestSceneNodes
 	{
 		var graph = new TestGraphBuilder(BlueprintVersion.Version)
 			.AddOutputWithNode("MeshConfig", "MeshConfig")
-			.AddNode(TestGraphBuilder.CreateMeshConfig("CreateMeshConfig", "glb-resource"))
+			// String here is technically invalid because this node takes Mesh or GLB resource.
+			// but since those are both resources we can use string to pass in the resource id
+			.AddNode(TestGraphBuilder.CreateMeshConfig<string>("CreateMeshConfig", "Resource<GLB>", "glb-resource"))
 			.ConnectEntry("CreateMeshConfig")
 			.ConnectExecution("CreateMeshConfig", "Set_MeshConfig")
 			.SetOutputFromNode("CreateMeshConfig", "MeshConfig", "MeshConfig")
@@ -96,7 +97,7 @@ public class TestSceneNodes
 			.AddInputWithNode<object>("GameObject", "SceneNode")
 			.AddNode(TestGraphBuilder.SetSceneNodeEnabled("SetSceneNodeEnabled", Enabled:false))
 			.ConnectEntry("SetSceneNodeEnabled")
-			.PassInputToNode("GameObject", "SetSceneNodeEnabled", "Node")
+			.PassInputToNode("GameObject", "SetSceneNodeEnabled", "SceneNode")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)
@@ -108,80 +109,15 @@ public class TestSceneNodes
 		Assert.IsNotNull(gameObject);
 		Assert.IsFalse(gameObject.activeSelf);
 	}
-	
-	[UnityTest]
-	public IEnumerator TestFindRenderer()
-	{
-		var graph = new TestGraphBuilder(BlueprintVersion.Version)
-			.AddInputWithNode<object>("Renderers", "Array<MeshRenderer>")
-			.AddOutputWithNode("Renderer", "MeshRenderer")
-			.AddNode(TestGraphBuilder.FindRenderer("FindRenderer", Name:"Ren1"))
-			.ConnectEntry("Set_Renderer")
-			.PassInputToNode("Renderers", "FindRenderer", "Array")
-			.SetOutputFromNode("FindRenderer", "Renderer", "Renderer")
-			.Build();
-
-		var task = new TestEnvBuilder(graph)
-			.AddChildGameObjectToRoot("Ren1")
-			.AddSceneComponent<SkinnedMeshRenderer>("Ren1")
-			.AddChildGameObjectToRoot("Ren2")
-			.AddSceneComponent<SkinnedMeshRenderer>("Ren2")
-			.AddBlueprintInput("Renderers", new List<SkinnedMeshRenderer>
-			{
-				GameObject.Find("Ren1").GetComponent<SkinnedMeshRenderer>(),
-				GameObject.Find("Ren2").GetComponent<SkinnedMeshRenderer>(),
-			})
-			.Build();
-		
-		yield return task;
-
-		var ren1 = GameObject.Find("Ren1")
-			.GetComponent<SkinnedMeshRenderer>();
-		Assert.IsNotNull(ren1);
-		Assert.IsTrue(task.ExecutionContext.TryReadOutput("Renderer", out var result));
-		Assert.IsTrue(result.TryInterpretAs(out SkinnedMeshRenderer renderer));
-		Assert.AreEqual(ren1, renderer);
-	}
-	
-	[UnityTest]
-	public IEnumerator TestFindSceneNodes()
-	{
-		var graph = new TestGraphBuilder(BlueprintVersion.Version)
-			.AddInputWithNode<object>("GameObject", "SceneNode")
-			.AddOutputWithNode("Array", "Array<SceneNode>")
-			.AddNode(TestGraphBuilder.FindSceneNodes("FindSceneNodes", Filter:"Hel"))
-			.ConnectEntry("Set_Array")
-			.PassInputToNode("GameObject", "FindSceneNodes", "Root")
-			.SetOutputFromNode("FindSceneNodes", "Nodes", "Array")
-			.Build();
-
-		var task = new TestEnvBuilder(graph)
-			.AddChildGameObjectToRoot("Hello")
-			.AddChildGameObjectToRoot("Helix")
-			.AddBlueprintInput("GameObject", GameObject.Find("Root").transform)
-			.Build();
-		
-		yield return task;
-		
-		var helloGameObject = GameObject.Find("Hello");
-		Assert.IsNotNull(helloGameObject);
-		var helixGameObject = GameObject.Find("Helix");
-		Assert.IsNotNull(helixGameObject);
-
-		Assert.IsTrue(task.ExecutionContext.TryReadOutput("Array", out var result));
-		Assert.IsTrue(result.TryReadArray(out List<Transform> transforms));
-		CollectionAssert.Contains(transforms, helloGameObject.transform);
-		CollectionAssert.Contains(transforms, helixGameObject.transform);
-	}
 
 	[UnityTest]
 	public IEnumerator TestSetBlendShape()
 	{
 		var graph = new TestGraphBuilder(BlueprintVersion.Version)
 			.AddInputWithNode<object>("Renderer", "MeshRenderer")
-			.AddNode(TestGraphBuilder.SetBlendShape("SetBlendShape", ID:"NeckJeanShirt", Value:1f))
+			.AddNode(TestGraphBuilder.SetBlendShape("SetBlendShape", BlendShapeID:"NeckJeanShirt", Value:1f))
 			.ConnectEntry("SetBlendShape")
-			.PassInputToNode("Renderer", "SetBlendShape", "Target")
+			.PassInputToNode("Renderer", "SetBlendShape", "Renderer")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)
@@ -210,7 +146,7 @@ public class TestSceneNodes
 			.AddInputWithNode<object>("Transform", "SceneNode")
 			.AddNode(TestGraphBuilder.TransformPosition("TransformPosition", Right:5F, Up:10f, Forward:20f))
 			.ConnectEntry("TransformPosition")
-			.PassInputToNode("Transform", "TransformPosition", "Transform Object")
+			.PassInputToNode("Transform", "TransformPosition", "SceneNode")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)
@@ -232,9 +168,9 @@ public class TestSceneNodes
 	{
 		var graph = new TestGraphBuilder(BlueprintVersion.Version)
 			.AddInputWithNode<object>("Transform", "SceneNode")
-			.AddNode(TestGraphBuilder.TransformPosition("TransformPosition", IsAdditive:true, Right:5F, Up:10f, Forward:20f))
+			.AddNode(TestGraphBuilder.TransformPosition("TransformPosition", Additive:true, Right:5F, Up:10f, Forward:20f))
 			.ConnectEntry("TransformPosition")
-			.PassInputToNode("Transform", "TransformPosition", "Transform Object")
+			.PassInputToNode("Transform", "TransformPosition", "SceneNode")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)
@@ -259,7 +195,7 @@ public class TestSceneNodes
 			.AddInputWithNode<object>("Transform", "SceneNode")
 			.AddNode(TestGraphBuilder.TransformRotation("TransformRotation", Pitch:60f, Yaw:120f, Roll:90f))
 			.ConnectEntry("TransformRotation")
-			.PassInputToNode("Transform", "TransformRotation", "Transform Object")
+			.PassInputToNode("Transform", "TransformRotation", "SceneNode")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)
@@ -282,9 +218,9 @@ public class TestSceneNodes
 	{
 		var graph = new TestGraphBuilder(BlueprintVersion.Version)
 			.AddInputWithNode<object>("Transform", "SceneNode")
-			.AddNode(TestGraphBuilder.TransformRotation("TransformRotation", IsAdditive:true, Pitch:60f, Yaw:120f, Roll:90f))
+			.AddNode(TestGraphBuilder.TransformRotation("TransformRotation", Additive:true, Pitch:60f, Yaw:120f, Roll:90f))
 			.ConnectEntry("TransformRotation")
-			.PassInputToNode("Transform", "TransformRotation", "Transform Object")
+			.PassInputToNode("Transform", "TransformRotation", "SceneNode")
 			.Build();
 
 		var task = new TestEnvBuilder(graph)

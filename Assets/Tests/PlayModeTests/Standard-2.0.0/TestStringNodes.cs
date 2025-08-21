@@ -33,7 +33,7 @@ public class TestStringNodes
 			.ConnectEntry("Set_Result")
 			.PassInputToNode("String1", "Append", "A")
 			.PassInputToNode("String2", "Append", "B")
-			.SetOutputFromNode("Append", "String", "Result")
+			.SetOutputFromNode("Append", "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestAppend", graph, out var blueprint));
@@ -58,8 +58,8 @@ public class TestStringNodes
 			.ConnectExecution("Set_Result1", "Set_Result2")
 			.PassInputToNode("TestString", "Contains1", "String")
 			.PassInputToNode("TestString", "Contains2", "String")
-			.SetOutputFromNode("Contains1", "Matches", "Result1")
-			.SetOutputFromNode("Contains2", "Matches", "Result2")
+			.SetOutputFromNode("Contains1", "Contains", "Result1")
+			.SetOutputFromNode("Contains2", "Contains", "Result2")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestContains", graph, out var blueprint));
@@ -88,7 +88,7 @@ public class TestStringNodes
 			.AddOutputWithNode("Result", "string")
 			.AddNode(TestGraphBuilder.FormatString("FormatString", Item:TestUtils.DefaultList<string>(2)))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("fString", "FormatString", "Input")
+			.PassInputToNode("fString", "FormatString", "FormatString")
 			.PassInputToNode("String1", "FormatString", "Item.1")
 			.PassInputToNode("String2", "FormatString", "Item.2")
 			.SetOutputFromNode("FormatString", "Result", "Result")
@@ -115,7 +115,7 @@ public class TestStringNodes
 			.AddOutputWithNode("Result", "string")
 			.AddNode(TestGraphBuilder.FormatString("FormatString", Item:TestUtils.DefaultList<string>(2)))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("fString", "FormatString", "Input")
+			.PassInputToNode("fString", "FormatString", "FormatString")
 			.PassInputToNode("String1", "FormatString", "Item.1")
 			.SetOutputFromNode("FormatString", "Result", "Result")
 			.Build();
@@ -140,9 +140,9 @@ public class TestStringNodes
 			.AddNode(TestGraphBuilder.Replace("Replace1", ToReplace:"Hello", Replacement:"Goodbye"))
 			.AddNode(TestGraphBuilder.Replace("Replace2", ToReplace:"Foo", Replacement:"Bar"))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("testString", "Replace1", "Input")
-			.ConnectNodes("Replace1", "Output", "Replace2", "Input")
-			.SetOutputFromNode("Replace2", "Output", "Result")
+			.PassInputToNode("testString", "Replace1", "String")
+			.ConnectNodes("Replace1", "Result", "Replace2", "String")
+			.SetOutputFromNode("Replace2", "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestReplace", graph, out var blueprint));
@@ -165,7 +165,7 @@ public class TestStringNodes
 			.AddNode(TestGraphBuilder.Split("Split", Separator:","))
 			.ConnectEntry("Set_Result")
 			.PassInputToNode("testString", "Split", "String")
-			.SetOutputFromNode("Split", "Array", "Result")
+			.SetOutputFromNode("Split", "Parts", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestSplit", graph, out var blueprint));
@@ -188,7 +188,7 @@ public class TestStringNodes
 			.AddNode(TestGraphBuilder.Split("Split", Separator:"."))
 			.ConnectEntry("Set_Result")
 			.PassInputToNode("testString", "Split", "String")
-			.SetOutputFromNode("Split", "Array", "Result")
+			.SetOutputFromNode("Split", "Parts", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestSplit", graph, out var blueprint));
@@ -210,8 +210,8 @@ public class TestStringNodes
 			.AddOutputWithNode("Result", "string")
 			.AddNode(TestGraphBuilder.ToLower("ToLower"))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("testString", "ToLower", "Input")
-			.SetOutputFromNode("ToLower", "Output", "Result")
+			.PassInputToNode("testString", "ToLower", "String")
+			.SetOutputFromNode("ToLower", "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestToLower", graph, out var blueprint));
@@ -233,8 +233,8 @@ public class TestStringNodes
 			.AddOutputWithNode("Result", "string")
 			.AddNode(TestGraphBuilder.ToUpper("ToUpper"))
 			.ConnectEntry("Set_Result")
-			.PassInputToNode("testString", "ToUpper", "Input")
-			.SetOutputFromNode("ToUpper", "Output", "Result")
+			.PassInputToNode("testString", "ToUpper", "String")
+			.SetOutputFromNode("ToUpper", "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestToUpper", graph, out var blueprint));
@@ -292,7 +292,7 @@ public class TestStringNodes
 			.AddNode(TestGraphBuilder.ToString<Transform>("ToString", "SceneNode"))
 			.ConnectEntry("CreateSceneNode")
 			.ConnectExecution("CreateSceneNode", "Set_Result")
-			.ConnectNodes("CreateSceneNode", "Node", "ToString", "Value")
+			.ConnectNodes("CreateSceneNode", "SceneNode", "ToString", "Value")
 			.ConnectNodes("ToString", "String", "Set_Result", "Value")
 			.SetOutputFromNode("ToString", "String", "Result")
 			.Build();

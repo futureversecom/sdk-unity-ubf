@@ -90,7 +90,7 @@ public class TestMathNodes
 			.ConnectEntry("Set_Result")
 			.PassInputToNode("value1", testCase.NodeName, "A")
 			.PassInputToNode("value2", testCase.NodeName, "B")
-			.SetOutputFromNode(testCase.NodeName, "Value", "Result")
+			.SetOutputFromNode(testCase.NodeName, "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestMath", graph, out var blueprint));
@@ -168,7 +168,7 @@ public class TestMathNodes
 			.ConnectEntry("Set_Result")
 			.PassInputToNode("value1", testCase.NodeName, "A")
 			.PassInputToNode("value2", testCase.NodeName, "B")
-			.SetOutputFromNode(testCase.NodeName, "Value", "Result")
+			.SetOutputFromNode(testCase.NodeName, "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestIncompatibleMath", graph, out var blueprint));

@@ -154,7 +154,7 @@ namespace UnitTests.PlayModeTests.Utils
 		public TestGraphBuilder AddInputWithNode<T>(string id, string type, object defaultValue = null)
 		{
 			return AddInput(id, type, defaultValue)
-				.AddNode(Input<T>($"Get_{id}", type, id));
+				.AddNode(Get<T>($"Get_{id}", type, id));
 		}
 		
 		public TestGraphBuilder AddOutputWithNode(string id, string type, object value = null)

@@ -333,8 +333,8 @@ public class TestLogicNodes
 			.AddNode(TestGraphBuilder.Pick("Pick2", "int", 1, 2,false))
 			.ConnectEntry("Set_Result1")
 			.ConnectExecution("Set_Result1", "Set_Result2")
-			.SetOutputFromNode("Pick1", "Value", "Result1")
-			.SetOutputFromNode("Pick2", "Value", "Result2")
+			.SetOutputFromNode("Pick1", "Result", "Result1")
+			.SetOutputFromNode("Pick2", "Result", "Result2")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestPick", graph, out var blueprint));
@@ -371,7 +371,7 @@ public class TestLogicNodes
 			.AddOutputWithNode("Result", "string")
 			.AddNode(TestGraphBuilder.MapValue("MapValue", "int", "string", input, "Default", dict.Keys.ToList(), dict.Values.ToList()))
 			.ConnectEntry("Set_Result")
-			.SetOutputFromNode("MapValue", "Output", "Result")
+			.SetOutputFromNode("MapValue", "Result", "Result")
 			.Build();
 
 		Assert.IsTrue(Blueprint.TryLoad("TestMapValue", graph, out var blueprint));
@@ -391,7 +391,7 @@ public class TestLogicNodes
 			.AddNode(TestGraphBuilder.IsNull<object>("IsNull", "SceneNode"))
 			.ConnectEntry("CreateSceneNode")
 			.ConnectExecution("CreateSceneNode", "Set_Result")
-			.ConnectNodes("CreateSceneNode", "Node", "IsNull", "Value")
+			.ConnectNodes("CreateSceneNode", "SceneNode", "IsNull", "Value")
 			.SetOutputFromNode("IsNull", "IsNull", "Result")
 			.Build();
 
