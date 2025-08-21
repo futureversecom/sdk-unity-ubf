@@ -93,14 +93,6 @@ namespace Futureverse.UBF.Runtime.Native.FFI
         [DllImport(__DllName, EntryPoint = "ctx_get_context_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern Dynamic* ctx_get_context_data(ArcExecutionContext* execution_context);
 
-        [DllImport(__DllName, EntryPoint = "ctx_get_dynamic_data_entry", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool ctx_get_dynamic_data_entry(ArcExecutionContext* execution_context, ushort* key, int key_len, Dynamic** @out);
-
-        [DllImport(__DllName, EntryPoint = "ctx_set_dynamic_data_entry", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool ctx_set_dynamic_data_entry(ArcExecutionContext* execution_context, ushort* key, int key_len, Dynamic* value);
-
         [UnmanagedFunctionPointer(CallingConvention.Cdecl)]
         public delegate bool ctx_get_declared_node_inputs_iterator_delegate(nint arg1, byte* arg2, int arg3);
 
