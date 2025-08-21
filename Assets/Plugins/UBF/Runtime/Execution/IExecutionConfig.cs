@@ -38,7 +38,7 @@ namespace Futureverse.UBF.Runtime.Execution
 		/// <param name="settings">Texture settings that are applied to the loaded Texture2D.</param>
 		/// <param name="callback">Callback containing the loaded Texture2D.</param>
 		/// <returns>IEnumerator to yield on</returns>
-		IEnumerator GetTextureInstance(ResourceId id, TextureImportSettings settings, Action<Texture2D, TextureAssetImportSettings> callback);
+		IEnumerator GetTextureInstance(ResourceId id, Action<Texture2D, TextureAssetImportSettings> callback);
 	}
 	
 	public class ExecutionConfig : IExecutionConfig
@@ -75,9 +75,9 @@ namespace Futureverse.UBF.Runtime.Execution
 			return ArtifactProvider.Instance.GetMeshResource(id, callback);
 		}
 
-		public IEnumerator GetTextureInstance(ResourceId id, TextureImportSettings settings, Action<Texture2D, TextureAssetImportSettings> callback)
+		public IEnumerator GetTextureInstance(ResourceId id, Action<Texture2D, TextureAssetImportSettings> callback)
 		{
-			return ArtifactProvider.Instance.GetTextureResource(id, settings, callback);
+			return ArtifactProvider.Instance.GetTextureResource(id, callback);
 		}
 		
 		/// <param name="rootTransform">The transform to which all objects spawned from this UBF execution will be parented.</param>

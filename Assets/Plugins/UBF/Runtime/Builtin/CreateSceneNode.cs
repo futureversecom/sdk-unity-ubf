@@ -31,7 +31,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 			gameObject.transform.localRotation = Quaternion.identity;
 			gameObject.transform.localScale = Vector3.one;
 
-			WriteOutput("Node", gameObject.transform);
+			WriteOutput("SceneNode", gameObject.transform);
 		}
 	}
 }

@@ -21,9 +21,9 @@ namespace Plugins.UBF.Runtime.Builtin.ResourceLoading
 				return;
 			}
 			
-			if (!TryRead("Mesh ID", out string meshId))
+			if (!TryRead("MeshID", out string meshId))
 			{
-				UbfLogger.LogError("[CreateMeshResource] Could not find input \"Mesh ID\"");
+				UbfLogger.LogError("[CreateMeshResource] Could not find input \"MeshID\"");
 				return;
 			}
 
@@ -37,7 +37,7 @@ namespace Plugins.UBF.Runtime.Builtin.ResourceLoading
 			);
 			
 			NodeContext.ExecutionContext.Config.RegisterRuntimeResource(resource);
-			WriteOutput("Resource", resourceId);
+			WriteOutput("Mesh", resourceId);
 		}
 	}
 }

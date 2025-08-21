@@ -24,7 +24,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 				yield break;
 			}
 
-			if (!TryRead<int>("Index", out var matIndex))
+			if (!TryRead<int>("MaterialIndex", out var matIndex))
 			{
 				matIndex = 0;
 			}
@@ -60,21 +60,10 @@ namespace Futureverse.UBF.Runtime.Builtin
 						break;
 					case ResourceId resourceId:
 					{
-						TextureImportSettings textureSettings = null;
-						if (NodeContext.ExecutionContext.GetDynamicDataEntry(
-								resourceId.Value,
-								out var dynamic
-							) &&
-							dynamic.TryInterpretAs<TextureImportSettings>(out var settings))
-						{
-							textureSettings = settings;
-						}
-
 						Texture2D textureResource = null;
 						var routine = CoroutineHost.Instance.StartCoroutine(
 							NodeContext.ExecutionContext.Config.GetTextureInstance(
 								resourceId,
-								textureSettings,
 								(texture, _) => { textureResource = texture; }
 							)
 						);
