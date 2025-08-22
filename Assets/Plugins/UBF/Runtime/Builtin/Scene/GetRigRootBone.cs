@@ -20,7 +20,7 @@ namespace Futureverse.UBF.Runtime.Builtin
             }
 
             
-            WriteOutput("Root Scene Node", rig.Root);
+            WriteOutput("RootBone", rig.Root);
         }
     }
 }

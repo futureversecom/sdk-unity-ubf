@@ -13,7 +13,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
         protected override void ExecuteSync()
         {
-            if (!TryRead<ISceneObject>("Object", out var obj))
+            if (!TryRead<ISceneObject>("SceneObject", out var obj))
             {
                 UbfLogger.LogError("[GetName] Could not find input \"Object\"");
                 return;

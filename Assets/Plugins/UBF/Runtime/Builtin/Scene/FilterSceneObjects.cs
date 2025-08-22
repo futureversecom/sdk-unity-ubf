@@ -13,13 +13,13 @@ namespace Futureverse.UBF.Runtime.Builtin
 
         protected override void ExecuteSync()
         {
-            if (!TryReadArray<ISceneObject>("Objects", out var components))
+            if (!TryReadArray<ISceneObject>("SceneObjects", out var components))
             {
                 UbfLogger.LogError("[FilterObjects] Could not find input \"Scene Components\"");
                 return;
             }
 
-            if (!TryRead<string>("Filter", out var filter))
+            if (!TryRead<string>("Filtered", out var filter))
             {
                 UbfLogger.LogError("[FilterObjects] Could not find input \"Filter\"");
                 return;
