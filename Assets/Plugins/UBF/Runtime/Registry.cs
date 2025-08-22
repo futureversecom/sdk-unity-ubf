@@ -63,7 +63,16 @@ namespace Futureverse.UBF.Runtime
 				.Register<CreateTextureResource>()
 				.Register<CreateBlueprintResource>()
 				.Register<CreateMeshResource>()
-				.Register<CreateGLBResource>();
+				.Register<CreateGLBResource>()
+				.Register<GetRigRootBone>()
+				.Register<GetRigBones>()
+				.Register<GetSceneObjectName>()
+				.Register<AttachSceneNode>()
+				.Register<FilterSceneObjects>()
+				.Register<GetSceneComponents>()
+				.Register<GetSceneNode>()
+				.Register<GetParentSceneNode>()
+				.Register<GetChildSceneNodes>();
 
 		/// <summary>
 		/// Adds a new type of node to the Registry.
