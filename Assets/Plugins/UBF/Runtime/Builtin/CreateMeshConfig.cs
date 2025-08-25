@@ -127,7 +127,10 @@ namespace Futureverse.UBF.Runtime.Builtin
 			}
 			// Set the avatar to the animator
 			var animator = instantiator.SceneTransform.GetComponentInParent<Animator>(includeInactive: true); // TODO make this a variable in the graph execution data?
-			animator.avatar = config.Config.Avatar;
+			if (animator != null)
+			{
+				animator.avatar = config.Config.Avatar;
+			}
 		}
 	}
 }
