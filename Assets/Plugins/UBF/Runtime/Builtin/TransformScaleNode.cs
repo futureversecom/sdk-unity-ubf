@@ -11,7 +11,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryRead<Transform>("SceneNode", out var transformObject))
+			if (!TryRead<SceneNode>("SceneNode", out var transformObject))
 			{
 				UbfLogger.LogError("[TransformScaleNode] Could not find input \"SceneNode\"");
 				return;
@@ -24,11 +24,11 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 			if (isAdditive)
 			{
-				transformObject.localScale += new Vector3(x, y, z);
+				transformObject.TargetSceneObject.transform.localScale += new Vector3(x, y, z);
 			}
 			else
 			{
-				transformObject.localScale = new Vector3(x, y, z);
+				transformObject.TargetSceneObject.transform.localScale = new Vector3(x, y, z);
 			}
 		}
 	}
