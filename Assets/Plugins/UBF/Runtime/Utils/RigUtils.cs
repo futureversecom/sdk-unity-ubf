@@ -129,6 +129,7 @@ namespace Plugins.UBF.Runtime.Utils
                 if (t == null)
                 {
                     Debug.LogError($"Cannot find avatar bone for {map[i].targetBoneName}");
+                    return null;
                 }
                 skeleton[i] = new SkeletonBone()
                 {
