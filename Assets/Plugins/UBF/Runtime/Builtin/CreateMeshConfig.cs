@@ -26,7 +26,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 			if (!TryRead("ConfigKey", out string configKey))
 			{
-				UbfLogger.LogError("[CreateMeshConfig] Could not find input \"ConfigOverrideKey\"");
+				UbfLogger.LogError("[CreateMeshConfig] Could not find input \"ConfigKey\"");
 				yield break;
 			}
 
