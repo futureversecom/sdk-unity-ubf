@@ -16,7 +16,6 @@ namespace UnitTests.PlayModeTests.Utils
 		private readonly Dictionary<string, object> _blueprintInputs = new();
 		private readonly string _blueprintJson;
 		public readonly GameObject RootObject;
-		
 		public delegate void BuilderFunc(ref TestEnv builder);
 
 		public static BlueprintExecutionTask Create(string blueprintJson, BuilderFunc build = null)
@@ -71,6 +70,15 @@ namespace UnitTests.PlayModeTests.Utils
 		public void AddBlueprintInput(string key, object input)
 		{
 			_blueprintInputs.Add(key, input);
+		}
+
+		public SceneNode SceneNode(Transform t)
+		{
+			return new SceneNode
+			{
+				TargetSceneObject = t.gameObject,
+				Name = t.gameObject.name
+			};
 		}
 
 		private BlueprintExecutionTask Build()

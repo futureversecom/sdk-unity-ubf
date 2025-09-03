@@ -36,7 +36,7 @@ public class TestSceneNodes
 		var task = TestEnv.Create(graph, (ref TestEnv e) =>
 		{
 			e.AddTestResource(resourceName, "Beanie.glb");
-			e.AddBlueprintInput(inputName, e.RootObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(e.RootObject.transform));
 		});
 		
 		LogAssert.Expect(LogType.Warning, "[UBF][SpawnMesh] Failed to get input \"Config\"");
@@ -118,7 +118,7 @@ public class TestSceneNodes
 
 		var task = TestEnv.Create(graph, (ref TestEnv e) =>
 		{
-			e.AddBlueprintInput(inputName, e.RootObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(e.RootObject.transform));
 		});
 		
 		yield return task;
@@ -177,7 +177,7 @@ public class TestSceneNodes
 		var task = TestEnv.Create(graph, (ref TestEnv e) =>
 		{
 			var gameObject = e.AddChildGameObject(e.RootObject, inputName);
-			e.AddBlueprintInput(inputName, gameObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(gameObject.transform));
 		});
 		
 		yield return task;
@@ -205,7 +205,7 @@ public class TestSceneNodes
 		{
 			var gameObject = e.AddChildGameObject(e.RootObject, inputName);
 			gameObject.transform.position = new Vector3(10f, 10f, 10f);
-			e.AddBlueprintInput(inputName, gameObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(gameObject.transform));
 		});
 		
 		yield return task;
@@ -232,7 +232,7 @@ public class TestSceneNodes
 		var task = TestEnv.Create(graph, (ref TestEnv e) =>
 		{
 			var gameObject = e.AddChildGameObject(e.RootObject, inputName);
-			e.AddBlueprintInput(inputName, gameObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(gameObject.transform));
 		});
 		
 		yield return task;
@@ -261,7 +261,7 @@ public class TestSceneNodes
 		{
 			var gameObject = e.AddChildGameObject(e.RootObject, inputName);
 			gameObject.transform.rotation = Quaternion.Euler(new Vector3(10f, 10f, 10f));
-			e.AddBlueprintInput(inputName, gameObject.transform);
+			e.AddBlueprintInput(inputName, e.SceneNode(gameObject.transform));
 		});
 		
 		yield return task;

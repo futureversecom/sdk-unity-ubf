@@ -35,7 +35,7 @@ public class TestArrayNodes
 
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			_ = g.AddInputWithNode<int>(inputName, UBFTypes.Int, list);
+			_ = g.AddInputWithNode<List<int>>(inputName, UBFTypes.ArrayInt, list);
 			var setResultNode = g.AddOutputWithNode(outputName, UBFTypes.Int);
 			var firstNode = g.AddNode(new First<int>(UBFTypes.Int));
 			g.ConnectEntry(setResultNode);
@@ -60,7 +60,7 @@ public class TestArrayNodes
 		
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			_ = g.AddInputWithNode<int>(inputName, UBFTypes.Int, list);
+			_ = g.AddInputWithNode<List<int>>(inputName, UBFTypes.ArrayInt, list);
 			var setResultNode = g.AddOutputWithNode(outputName, UBFTypes.Int);
 			var firstNode = g.AddNode(new First<int>(UBFTypes.Int));
 			g.ConnectEntry(setResultNode);
@@ -92,7 +92,7 @@ public class TestArrayNodes
 
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			g.AddInputWithNode<int>(inputName, UBFTypes.Int, list);
+			g.AddInputWithNode<List<int>>(inputName, UBFTypes.ArrayInt, list);
 			var setResultNode = g.AddOutputWithNode(outputName, UBFTypes.Int);
 			var atIndexNode = g.AddNode(new AtIndex<int>(UBFTypes.Int, index));
 			g.ConnectEntry(setResultNode);
@@ -123,7 +123,7 @@ public class TestArrayNodes
 
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			g.AddInputWithNode<int>(inputName, UBFTypes.Int, list);
+			g.AddInputWithNode<List<int>>(inputName, UBFTypes.ArrayInt, list);
 			var setResultNode = g.AddOutputWithNode(outputName, UBFTypes.Int);
 			var atIndexNode = g.AddNode(new AtIndex<int>(UBFTypes.Int, index));
 			g.ConnectEntry(setResultNode);
@@ -180,7 +180,7 @@ public class TestArrayNodes
 		
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			g.AddInputWithNode<string>(inputName, UBFTypes.String, list);
+			g.AddInputWithNode<List<string>>(inputName, UBFTypes.ArrayString, list);
 			var debugLogNode1 = g.AddNode(new DebugLog());
 			var debugLogNode2 = g.AddNode(new DebugLog());
 			var forEachNode = g.AddNode(new ForEach<string>(UBFTypes.String));
@@ -264,7 +264,7 @@ public class TestArrayNodes
 		
 		var graph = TestGraph.Create((ref TestGraph g) =>
 		{
-			g.AddInputWithNode<string>(inputName, UBFTypes.String, list);
+			g.AddInputWithNode<List<string>>(inputName, UBFTypes.ArrayString, list);
 			var debugLogNode1 = g.AddNode(new DebugLog());
 			var debugLogNode2 = g.AddNode(new DebugLog("Finished"));
 			var forEachNode = g.AddNode(new ForEach<string>(UBFTypes.String));
