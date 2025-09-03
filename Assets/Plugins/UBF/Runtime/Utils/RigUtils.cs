@@ -117,19 +117,21 @@ namespace Plugins.UBF.Runtime.Utils
             var human = new HumanBone[map.Count];
             var skeleton = new SkeletonBone[map.Count];
 
-            for (int i = 0; i < human.Length; i++)
+            for (var i = 0; i < human.Length; i++)
             {
-                var bone = new HumanBone();
-                bone.humanName = map[i].sourceBoneName;
-                bone.boneName = map[i].targetBoneName;
-                bone.limit = new HumanLimit() { useDefaultValues = true };
+                var bone = new HumanBone
+                {
+                    humanName = map[i].sourceBoneName,
+                    boneName = map[i].targetBoneName,
+                    limit = new HumanLimit() { useDefaultValues = true }
+                };
                 human[i] = bone;
             
                 var t = boneSource.FindRecursive(map[i].targetBoneName);
                 if (t == null)
                 {
                     Debug.LogError($"Cannot find avatar bone for {map[i].targetBoneName}");
-                    return null;
+                    continue;
                 }
                 skeleton[i] = new SkeletonBone()
                 {
@@ -158,12 +160,12 @@ namespace Plugins.UBF.Runtime.Utils
         
         private static SkeletonBone[] CreateSkeleton(GameObject avatarRoot)
         {
-            List<SkeletonBone> skeleton = new List<SkeletonBone>();
+            var skeleton = new List<SkeletonBone>();
 
-            Transform[] avatarTransforms = avatarRoot.GetComponentsInChildren<Transform>();
-            foreach (Transform avatarTransform in avatarTransforms)
+            var avatarTransforms = avatarRoot.GetComponentsInChildren<Transform>();
+            foreach (var avatarTransform in avatarTransforms)
             {
-                SkeletonBone bone = new SkeletonBone()
+                var bone = new SkeletonBone()
                 {
                     name = avatarTransform.name,
                     position = avatarTransform.localPosition,
@@ -173,7 +175,7 @@ namespace Plugins.UBF.Runtime.Utils
 
                 skeleton.Add(bone);
             }
-            string[] names = skeleton.Select(x => x.name).ToArray();
+            var names = skeleton.Select(x => x.name).ToArray();
             Debug.Log(string.Join('\n', names));
             return skeleton.ToArray();
         }
@@ -181,10 +183,10 @@ namespace Plugins.UBF.Runtime.Utils
         public static Transform FindRecursive(this Transform transform, string name) {
             if(transform == null) return null;
             int count = transform.childCount;
-            for(int i = 0; i < count; i++) {
-                Transform child = transform.GetChild(i);
+            for (var i = 0; i < count; i++) {
+                var child = transform.GetChild(i);
                 if(child.name == name) return child;
-                Transform subChild = FindRecursive(child, name);
+                var subChild = FindRecursive(child, name);
                 if(subChild != null) return subChild;
             }
             return null;

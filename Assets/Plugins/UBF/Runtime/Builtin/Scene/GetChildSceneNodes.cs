@@ -15,7 +15,7 @@ namespace Futureverse.UBF.Runtime.Builtin
         {
             if (!TryRead<SceneNode>("SceneNode", out var node))
             {
-                UbfLogger.LogError("[GetChildSceneNodes] Could not find input \"Scene Node\"");
+                UbfLogger.LogError("[GetChildSceneNodes] Could not find input \"SceneNode\"");
                 return;
             }
             

@@ -47,6 +47,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 		{
 			if (!TryRead<string>(resourceName, out var property))
 			{
+				UbfLogger.LogError($"[{GetType().Name}] Could not find input \"{resourceName}\"");
 				propertiesDictionary.Add(propertyName, 0);
 				return;
 			}
