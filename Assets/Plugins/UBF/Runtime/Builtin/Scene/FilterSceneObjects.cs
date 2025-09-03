@@ -27,7 +27,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
             // Do I filter by component specific logic like mesh name? Or by name of scene node?
             var filtered = components.Where(x => x.GetName().ToLower().Contains(filter.ToLower()));
-            WriteOutput("Filtered", filtered.ToArray());
+            WriteOutput("Filtered", filtered);
 
         }
     }

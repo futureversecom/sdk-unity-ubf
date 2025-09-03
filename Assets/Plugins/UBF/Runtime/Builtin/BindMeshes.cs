@@ -37,12 +37,15 @@ namespace Futureverse.UBF.Runtime.Builtin
 			}
 
 			// At least one item having .skinned means it has at least 1 renderer, and that renderer is definitely a SkinnedMeshRenderer
-			var rootBone = (rigRenderers.First(x => x.skinned).TargetMeshRenderers[0] as SkinnedMeshRenderer).rootBone;
+			var rootBone = (rigRenderers.First(x => x.skinned).TargetMeshRenderers[0] as SkinnedMeshRenderer)?.rootBone;
 			var boneDictionary = new Dictionary<string, Transform>();
-			var rootBoneChildren = rootBone.GetComponentsInChildren<Transform>();
-			foreach (var child in rootBoneChildren)
+			if (rootBone != null)
 			{
-				boneDictionary[child.name] = child;
+				var rootBoneChildren = rootBone.GetComponentsInChildren<Transform>();
+				foreach (var child in rootBoneChildren)
+				{
+					boneDictionary[child.name] = child;
+				}
 			}
 
 			foreach (var targetSkin in targetSkins)

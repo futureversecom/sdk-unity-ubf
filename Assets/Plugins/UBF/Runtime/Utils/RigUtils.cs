@@ -175,7 +175,7 @@ namespace Plugins.UBF.Runtime.Utils
 
                 skeleton.Add(bone);
             }
-            var names = skeleton.Select(x => x.name).ToArray();
+            var names = skeleton.Select(x => x.name);
             Debug.Log(string.Join('\n', names));
             return skeleton.ToArray();
         }

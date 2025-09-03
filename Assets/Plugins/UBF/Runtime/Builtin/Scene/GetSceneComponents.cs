@@ -27,10 +27,10 @@ namespace Futureverse.UBF.Runtime.Builtin
             switch (componentType)
             {
                 case "MeshRenderer":
-                    WriteOutput("SceneComponents", node.GetComponents<MeshRendererSceneComponent>().ToArray());
+                    WriteOutput("SceneComponents", node.GetComponents<MeshRendererSceneComponent>());
                     break;
                 case "Rig":
-                    WriteOutput("SceneComponents", node.GetComponents<RigSceneComponent>().ToArray());
+                    WriteOutput("SceneComponents", node.GetComponents<RigSceneComponent>());
                     break;
             }
         }
