@@ -43,7 +43,7 @@ namespace Futureverse.UBF.Runtime
         public void AddComponent(SceneComponent component, bool removeFromExisting = true)
         {
             Components.Add(component);
-            if (component.Node != null && removeFromExisting)
+            if (component.Node != null && component.Node != this && removeFromExisting)
             {
                 component.Node.Components.Remove(component);
             }
