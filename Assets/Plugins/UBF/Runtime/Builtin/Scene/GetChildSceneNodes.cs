@@ -19,7 +19,31 @@ namespace Futureverse.UBF.Runtime.Builtin
                 return;
             }
             
-            WriteOutput("Children", node.Children.ToArray());
+            if (!TryRead<bool>("Recursive", out var recursive))
+            {
+                UbfLogger.LogError("[GetChildSceneNodes] Could not find input \"Recursive\"");
+                return;
+            }
+
+            if (recursive)
+            {
+                var children = new List<SceneNode>();
+                GetChildrenRecursive(node, children);
+                WriteOutput("Children", children);
+            }
+            else
+            {
+                WriteOutput("Children", node.Children);
+            }
+        }
+
+        private void GetChildrenRecursive(SceneNode current, List<SceneNode> children)
+        {
+            foreach (var child in current.Children)
+            {
+                children.Add(child);
+                GetChildrenRecursive(child, children);
+            }
         }
     }
 }
