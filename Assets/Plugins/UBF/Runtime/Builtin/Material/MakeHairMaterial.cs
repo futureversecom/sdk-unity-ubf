@@ -38,7 +38,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 		}
 		
 		protected override Material GetMaterial => 
-			TryRead<bool>("Use Alpha", out var property) && property ?
+			TryRead<bool>("UseAlpha", out var property) && property ?
 				UBFSettings.GetOrCreateSettings().Hair :
 				UBFSettings.GetOrCreateSettings().PbrOpaque;
 	}

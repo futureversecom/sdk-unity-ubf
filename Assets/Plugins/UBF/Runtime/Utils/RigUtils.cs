@@ -1,6 +1,8 @@
 // Copyright (c) 2025, Futureverse Corporation Limited. All rights reserved.
 
 using System.Collections.Generic;
+using System.Linq;
+using Futureverse.UBF.Runtime;
 using Futureverse.UBF.Runtime.Utils;
 using GLTFast;
 using UnityEngine;
@@ -43,6 +45,7 @@ namespace Plugins.UBF.Runtime.Utils
             }
 
             var boneArray = target.bones;
+            
             for (var idx = 0; idx < boneArray.Length; ++idx)
             {
                 var boneName = boneArray[idx].name;
@@ -106,6 +109,87 @@ namespace Plugins.UBF.Runtime.Utils
             }
 
             return true;
+        }
+        
+        public static Avatar CreateAvatar(Transform boneSource, List<MeshConfig.ConfigMapItem> map)
+        {
+            var desc = new HumanDescription();
+            var human = new HumanBone[map.Count];
+            var skeleton = new SkeletonBone[map.Count];
+
+            for (var i = 0; i < human.Length; i++)
+            {
+                var bone = new HumanBone
+                {
+                    humanName = map[i].sourceBoneName,
+                    boneName = map[i].targetBoneName,
+                    limit = new HumanLimit() { useDefaultValues = true }
+                };
+                human[i] = bone;
+            
+                var t = boneSource.FindRecursive(map[i].targetBoneName);
+                if (t == null)
+                {
+                    Debug.LogError($"Cannot find avatar bone for {map[i].targetBoneName}");
+                    continue;
+                }
+                skeleton[i] = new SkeletonBone()
+                {
+                    name = map[i].sourceBoneName,
+                    position = t.position,
+                    rotation = t.rotation,
+                    scale = t.localScale
+                };
+
+            }
+
+            desc.human = human;
+            desc.skeleton = CreateSkeleton(boneSource.gameObject);
+            desc.upperArmTwist = 0.5f;
+            desc.lowerArmTwist = 0.5f;
+            desc.upperLegTwist = 0.5f;
+            desc.lowerLegTwist = 0.5f;
+            desc.armStretch = 0.05f;
+            desc.legStretch = 0.05f;
+            desc.feetSpacing = 0f;
+            desc.hasTranslationDoF = false;
+            var rtAvatar = AvatarBuilder.BuildHumanAvatar(boneSource.gameObject, desc);
+
+            return rtAvatar;
+        }
+        
+        private static SkeletonBone[] CreateSkeleton(GameObject avatarRoot)
+        {
+            var skeleton = new List<SkeletonBone>();
+
+            var avatarTransforms = avatarRoot.GetComponentsInChildren<Transform>();
+            foreach (var avatarTransform in avatarTransforms)
+            {
+                var bone = new SkeletonBone()
+                {
+                    name = avatarTransform.name,
+                    position = avatarTransform.localPosition,
+                    rotation = avatarTransform.localRotation,
+                    scale = avatarTransform.localScale
+                };
+
+                skeleton.Add(bone);
+            }
+            var names = skeleton.Select(x => x.name);
+            Debug.Log(string.Join('\n', names));
+            return skeleton.ToArray();
+        }
+        
+        public static Transform FindRecursive(this Transform transform, string name) {
+            if(transform == null) return null;
+            int count = transform.childCount;
+            for (var i = 0; i < count; i++) {
+                var child = transform.GetChild(i);
+                if(child.name == name) return child;
+                var subChild = FindRecursive(child, name);
+                if(subChild != null) return subChild;
+            }
+            return null;
         }
 	}
 }

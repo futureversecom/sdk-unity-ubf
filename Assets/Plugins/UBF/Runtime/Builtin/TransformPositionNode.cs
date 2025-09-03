@@ -11,7 +11,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 		protected override void ExecuteSync()
 		{
-			if (!TryRead<Transform>("SceneNode", out var transformObject))
+			if (!TryRead<SceneNode>("SceneNode", out var transformObject))
 			{
 				UbfLogger.LogError("[TransformPositionNode] Could not find input \"SceneNode\"");
 				return;
@@ -27,22 +27,22 @@ namespace Futureverse.UBF.Runtime.Builtin
 			{
 				if (isAdditive)
 				{
-					transformObject.position += new Vector3(x, y, z);
+					transformObject.TargetSceneObject.transform.position += new Vector3(x, y, z);
 				}
 				else
 				{
-					transformObject.position = new Vector3(x, y, z);
+					transformObject.TargetSceneObject.transform.position = new Vector3(x, y, z);
 				}
 			}
 			else
 			{
 				if (isAdditive)
 				{
-					transformObject.localPosition += new Vector3(x, y, z);
+					transformObject.TargetSceneObject.transform.localPosition += new Vector3(x, y, z);
 				}
 				else
 				{
-					transformObject.localPosition = new Vector3(x, y, z);
+					transformObject.TargetSceneObject.transform.localPosition = new Vector3(x, y, z);
 				}
 			}
 		}
