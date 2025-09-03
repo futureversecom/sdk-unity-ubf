@@ -89,7 +89,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 
 				if (Renderers[0].skinned)
 				{
-					var rigRoot = (Renderers[0].TargetMeshRenderers[0] as SkinnedMeshRenderer).rootBone;
+					var rigRoot = (Renderers[0].TargetMeshRenderers[0] as SkinnedMeshRenderer)?.rootBone;
 					var rigRootNode = SceneNode.BuildSceneTree(rigRoot, out var boneNodes);
 					var rig = new RigSceneComponent
 					{
