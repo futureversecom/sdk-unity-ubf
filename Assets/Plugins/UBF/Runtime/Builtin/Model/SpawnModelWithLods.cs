@@ -99,6 +99,7 @@ namespace Futureverse.UBF.Runtime.Builtin
 					};
 
 					rootNode.AddComponent(rig);
+					rootNode.AddChild(rigRootNode, removeFromParent: false);
 				}
 			}
 			

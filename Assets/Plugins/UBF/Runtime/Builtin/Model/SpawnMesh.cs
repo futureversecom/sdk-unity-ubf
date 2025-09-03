@@ -104,19 +104,11 @@ namespace Futureverse.UBF.Runtime.Builtin
             if (Renderers.Any(x => x.skinned))
             {
 	            var skR = Renderers.First(x => x.skinned);
-	            //var rigRoot = (skR.TargetMeshRenderers[0] as SkinnedMeshRenderer).rootBone;
 	            var rig = RigSceneComponent.CreateFromSMR(skR.TargetMeshRenderers[0] as SkinnedMeshRenderer);
-	            /*
-	            var rigRootNode = SceneNode.BuildSceneTree(rigRoot, out var boneNodes);
-	            var rig = new RigSceneComponent
-	            {
-		            Node = rootNode,
-		            Bones = boneNodes,
-		            Root = rigRootNode
-	            };
-	            */
 
 	            rootNode.AddComponent(rig);
+	            rootNode.AddChild(rig.Root, removeFromParent: false);
+
             }
 
             parent.AddChild(rootNode);
